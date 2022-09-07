@@ -5,8 +5,6 @@ const initModels=()=>{
   Users.belongsTo(Roles);
   Roles.hasMany(Users);
 
-  
-
   //? Users<->Accommodations
   Users.belongsToMany(Accommodations, { through: Reservations });
   Accommodations.belongsToMany(Users, { through: Reservations });
