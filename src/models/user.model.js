@@ -79,11 +79,6 @@ const Users = db.define('users', {
     },
     field: 'profile_image'
   },
-  country: {
-    allowNull: false,
-    type: DataTypes.STRING,
-
-  },
   status: {
     allowNull: false,
     type: DataTypes.STRING,

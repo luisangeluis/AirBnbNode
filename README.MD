@@ -34,8 +34,8 @@
 
 # Paths de mi usuario  a traves de mi aplicación
 
-Registrar mi usuario.
-Logguear mi usuario
+[✔]Registrar mi usuario.
+[✔]Logguear mi usuario
 
 ### Usuario sin sesión iniciada
 1. Ver los lugares.

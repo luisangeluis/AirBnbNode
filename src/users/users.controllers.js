@@ -13,7 +13,6 @@ const userDB = [
     "birthday_date": "22/10/2000",
     "rol": "normal",
     "profile_image": "localhost:3000/api/v1/uploads1661728653826-proyecto.png",
-    "country": "mexico",
     "active": true,
     "verified": false
   },
@@ -27,7 +26,6 @@ const userDB = [
     "birthday_date": "10/10/2000",
     "rol": "admin",
     "profile_image": "",
-    "country": "mexico",
     "active": true,
     "verified": false
   }
@@ -42,8 +40,6 @@ const getAllUsers = async () => {
   });
   return data;
 
-  // return userDB;
-  //select * from users;
 }
 
 const getUserById = async (id) => {
@@ -57,8 +53,6 @@ const getUserById = async (id) => {
     }
   })
   return data;
-  // const data =await userDB.filter(item => item.id === id);
-  // return data.length > 0 ? data[0] : false;
 
 }
 // TODO REVISAR EL HTTP de register
@@ -68,7 +62,7 @@ const createUser = async (data) => {
     ...data,
     id: uuid.v4(),
     password: hashPassword(data.password),
-    role: 'normal',
+    role: 'uuid',
     status: 'active',
     verified: false,
   })
@@ -93,32 +87,45 @@ const createUser = async (data) => {
 }
 
 const editUser = async (userId, data, userRol) => {
+  const { id, password, verified, roleId, ...restOfProperties } = data;
+  Roles.findOne({ where: { name: 'admin' } })
+    .then(res => {
+      if (res.id === userRol) {
+        const dataOfAdmin = await Users.update({ ...restOfProperties, roleId }, { where: { id: userId } });
+        return dataOfAdmin
+      } else {
 
-  if (userRol === 'admin') {
-    const { id, password, verified, ...newData } = data;
-    const response = Users.update({
-      //Valores que quiero actualizar
-      ...newData
-    }, {
-      where: {
-        id: userId
+        const dataOfNonAdmin = await Users.update(restOfProperties, { where: { id: userId } });
+        return dataOfNonAdmin;
       }
-    });
+    })
+    .catch(error => { return error })
 
-    return response;
-  } else {
-    const { id, password, verified, role, ...newData } = data;
-    const response = Users.update({
-      //Valores que quiero actualizar
-      ...newData
-    }, {
-      where: {
-        id: userId
-      }
-    });
+  // if (userRol === 'admin') {
+  //   const { id, password, verified, ...newData } = data;
+  //   const response = Users.update({
+  //     //Valores que quiero actualizar
+  //     ...newData
+  //   }, {
+  //     where: {
+  //       id: userId
+  //     }
+  //   });
 
-    return response;
-  }
+  //   return response;
+  // } else {
+  //   const { id, password, verified, roleId, ...newData } = data;
+  //   const response = Users.update({
+  //     //Valores que quiero actualizar
+  //     ...newData
+  //   }, {
+  //     where: {
+  //       id: userId
+  //     }
+  //   });
+
+  //   return response;
+  // }
 
   // const index = userDB.findIndex(user => user.id === id);
   // if (index !== -1) {
@@ -153,7 +160,7 @@ const deleteUser = async (id) => {
 
 }
 
-const getUserByEmail = async(email) => {
+const getUserByEmail = async (email) => {
   const response = await Users.findOne({
     where: {
       email
@@ -167,13 +174,13 @@ const getUserByEmail = async(email) => {
   // return data.length > 0 ? data[0] : false;
 }
 
-const editProfileImg = async(userId, imgUrl) => {
+const editProfileImg = async (userId, imgUrl) => {
 
   const response = await Users.update({
-    profileImage:imgUrl
-  },{
-    where:{
-      id:userId
+    profileImage: imgUrl
+  }, {
+    where: {
+      id: userId
     }
   })
 

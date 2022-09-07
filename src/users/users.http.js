@@ -45,7 +45,7 @@ const register = (req, res) => {
     !data.password ||
     !data.phone ||
     !data.birthdayDate ||
-    !data.country
+    !data.address
   ) {
     return res.status(400).json({
       message: 'All fields must be completed',
@@ -55,7 +55,6 @@ const register = (req, res) => {
         email: 'example@example.com',
         password: 'string',
         birthdayDate: 'DD/MM/YYYY',
-        country: 'string',
       },
     });
   } else {
@@ -100,7 +99,6 @@ const edit = (req, res) => {
     !data.rol ||
     !data.profile_image ||
     !data.birthday_date ||
-    !data.country ||
     !data.active
   ) {
     return res.status(400).json({
@@ -113,7 +111,6 @@ const edit = (req, res) => {
         rol: 'normal',
         profile_image: 'example.com/image/example.png',
         birthday_date: 'DD/MM/YYYY',
-        country: 'string',
         active: true,
       },
     });
@@ -140,7 +137,6 @@ const editMyUser = (req, res) => {
     !data.phone ||
     !data.profile_image ||
     !data.birthday_date ||
-    !data.country ||
     !data.active
   ) {
     return res.status(400).json({
@@ -154,7 +150,6 @@ const editMyUser = (req, res) => {
         rol: 'normal',
         profile_image: 'example.com/image/example.png',
         birthday_date: 'DD/MM/YYYY',
-        country: 'string',
         active: true,
       },
     });
