@@ -1,36 +1,8 @@
 const uuid = require('uuid');
 const { hashPassword } = require('../utils/crypt');
 const Users = require('../models/user.model');
+const Roles = require('../models/roles.model');
 const { response } = require('express');
-
-const userDB = [
-  {
-    "id": "d9dbc589-36ff-4773-a77f-f0112834d7f4",
-    "first_name": "luis",
-    "last_name": "zepeda",
-    "email": "luis@correo.com",
-    "password": "$2b$10$ZPDohrvpVF6DE1HIYd4yTO/gmZkvD4/b50hPqOGdhNZ7WNJWioFd6",
-    "phone": "1234567890",
-    "birthday_date": "22/10/2000",
-    "rol": "normal",
-    "profile_image": "localhost:3000/api/v1/uploads1661728653826-proyecto.png",
-    "active": true,
-    "verified": false
-  },
-  {
-    "id": "8dd772dc-8da0-45f9-9766-5ab6651dd0c7",
-    "first_name": "user2",
-    "last_name": "user2",
-    "email": "user2@example.com",
-    "password": "$2b$10$7zHY4DSRvc49KKV.Uk015OdVZd.P6SRYgL25qBqwSxI3evVpI/b6C",
-    "phone": "",
-    "birthday_date": "10/10/2000",
-    "rol": "admin",
-    "profile_image": "",
-    "active": true,
-    "verified": false
-  }
-];
 
 const getAllUsers = async () => {
 
@@ -110,9 +82,9 @@ const deleteUser = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-  const response = await Users.findOne({where: {email}});
+  const response = await Users.findOne({ where: { email } });
   return response;
-  
+
 }
 
 const editProfileImg = async (userId, imgUrl) => {
@@ -128,6 +100,26 @@ const editProfileImg = async (userId, imgUrl) => {
   return response;
 }
 
+const getUserWithRole = async (userId) => {
+  const data = await Users.findOne({
+    where: {
+      id: userId
+    },
+    attributes: {
+      exclude: ['password', 'createdAt', 'updatedAt']
+    },
+    include:
+    {
+      model: Roles,
+      attributes:{
+        exclude: ['id', 'createdAt', 'updatedAt']
+      }
+    }
+  })
+
+  return data;
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -135,5 +127,6 @@ module.exports = {
   editUser,
   deleteUser,
   getUserByEmail,
-  editProfileImg
+  editProfileImg,
+  getUserWithRole
 }

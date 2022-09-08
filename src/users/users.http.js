@@ -193,6 +193,17 @@ const postProfileImg = (req, res) => {
   res.status(200).json(data);
 
 }
+
+const getUserRole = (req, res) => {
+  const id = req.params.id;
+  userControllers.getUserWithRole(id)
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(400).json({ message: error})
+    })
+}
 module.exports = {
   getAll,
   getById,
@@ -202,5 +213,6 @@ module.exports = {
   editMyUser,
   getMyUser,
   removeMyUser,
-  postProfileImg
+  postProfileImg,
+  getUserRole
 };

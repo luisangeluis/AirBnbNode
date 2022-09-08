@@ -28,4 +28,7 @@ router
   .delete(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, usersServices.remove)
   .put(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, usersServices.edit);
 
+router.route('/:id/role')
+  .get(usersServices.getUserRole);
+
 exports.router = router;
