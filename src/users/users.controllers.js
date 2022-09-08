@@ -1,6 +1,7 @@
 const uuid = require('uuid');
 const { hashPassword } = require('../utils/crypt');
 const Users = require('../models/user.model');
+const { response } = require('express');
 
 const userDB = [
   {
@@ -88,65 +89,13 @@ const createUser = async (data) => {
 
 const editUser = async (userId, data, userRol) => {
   const { id, password, verified, roleId, ...restOfProperties } = data;
-  Roles.findOne({ where: { name: 'admin' } })
-    .then(res => {
-      if (res.id === userRol) {
-        const dataOfAdmin = await Users.update({ ...restOfProperties, roleId }, { where: { id: userId } });
-        return dataOfAdmin
-      } else {
-
-        const dataOfNonAdmin = await Users.update(restOfProperties, { where: { id: userId } });
-        return dataOfNonAdmin;
-      }
-    })
-    .catch(error => { return error })
-
-  // if (userRol === 'admin') {
-  //   const { id, password, verified, ...newData } = data;
-  //   const response = Users.update({
-  //     //Valores que quiero actualizar
-  //     ...newData
-  //   }, {
-  //     where: {
-  //       id: userId
-  //     }
-  //   });
-
-  //   return response;
-  // } else {
-  //   const { id, password, verified, roleId, ...newData } = data;
-  //   const response = Users.update({
-  //     //Valores que quiero actualizar
-  //     ...newData
-  //   }, {
-  //     where: {
-  //       id: userId
-  //     }
-  //   });
-
-  //   return response;
-  // }
-
-  // const index = userDB.findIndex(user => user.id === id);
-  // if (index !== -1) {
-  //   userDB[index] = {
-  //     id: id,
-  //     first_name: data.first_name,
-  //     last_name: data.last_name,
-  //     email: data.email,
-  //     password: userDB[index].password,
-  //     phone: data.phone,
-  //     birthday_date: data.birthday_date,
-  //     rol: data.rol,
-  //     profile_image: data.profile_image ? data.profile_image : '',
-  //     country: data.country,
-  //     active: data.active,
-  //     verified: false,
-  //   }
-  //   return userDB[index];
-  // } else {
-  //   return createUser(data);
-  // }
+  if ('5ee551ed-7bf4-44b0-aeb5-daaa824b9473' === userRol) {
+    const response = await Users.update({ ...restOfProperties, roleId }, { where: { id: userId } });
+    return response;
+  } else {
+    const response = await Users.update(restOfProperties, { where: { id: userId } });
+    return response;
+  }
 }
 
 const deleteUser = async (id) => {
@@ -161,17 +110,9 @@ const deleteUser = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-  const response = await Users.findOne({
-    where: {
-      email
-    },
-    attributes: {
-      exclude: ['password']
-    }
-  })
+  const response = await Users.findOne({where: {email}});
   return response;
-  // const data = userDB.filter(item => item.email === email);
-  // return data.length > 0 ? data[0] : false;
+  
 }
 
 const editProfileImg = async (userId, imgUrl) => {
@@ -185,15 +126,6 @@ const editProfileImg = async (userId, imgUrl) => {
   })
 
   return response;
-
-  // const index = userDB.findIndex(user => user.id === userId);
-
-  // if (index !== -1) {
-  //   userDB[index].profile_image = imgUrl;
-  //   return userDB[index];
-  // }
-
-  // return false;
 }
 
 module.exports = {
