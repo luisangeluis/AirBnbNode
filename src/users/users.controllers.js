@@ -5,18 +5,15 @@ const Roles = require('../models/roles.model');
 const { response } = require('express');
 
 const getAllUsers = async () => {
-
   const data = await Users.findAll({
     attributes: {
       exclude: ['password']
     }
   });
   return data;
-
 }
 
 const getUserById = async (id) => {
-
   const data = await Users.findOne({
     where: {
       id: id
@@ -26,16 +23,14 @@ const getUserById = async (id) => {
     }
   })
   return data;
-
 }
-// TODO REVISAR EL HTTP de register
 const createUser = async (data) => {
-
   const newUser = await Users.create({
     ...data,
     id: uuid.v4(),
     password: hashPassword(data.password),
-    role: 'uuid',
+    //TODO OBTENER EL ROLE GUEST CUANDO PUEDA OBTENER LOS ROLES
+    roleId: 'fef3a08d-2cec-4728-9745-7cbd2b37e557',
     status: 'active',
     verified: false,
   })
@@ -54,9 +49,7 @@ const createUser = async (data) => {
   //   verified: false,
   //   gender:data.gender
   // })
-
   return newUser;
-
 }
 
 const editUser = async (userId, data, userRol) => {
@@ -78,17 +71,14 @@ const deleteUser = async (id) => {
   })
 
   return data;
-
 }
 
 const getUserByEmail = async (email) => {
   const response = await Users.findOne({ where: { email } });
   return response;
-
 }
 
 const editProfileImg = async (userId, imgUrl) => {
-
   const response = await Users.update({
     profileImage: imgUrl
   }, {

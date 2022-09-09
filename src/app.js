@@ -21,7 +21,7 @@ db.authenticate()
   .then(res => console.log('database autenticate'))
   .catch(error => console.log(error))
 
-//{force:true} es solo para desarrollo.
+{force:true}// es solo para desarrollo.
 if (process.env.NODE_ENV === 'production') {
   db.sync()
     .then(() => {
@@ -31,12 +31,50 @@ if (process.env.NODE_ENV === 'production') {
     .catch(error => console.log(error))
 } else {
   db.sync({ force: true })
+  // db.sync()
     .then(() => {
       console.log('database synced');
       defaultData();
     })
     .catch(error => console.log(error))
 }
+
+
+
+// if (process.env.NODE_ENV === 'production') {
+//   db.sync()
+//     .then(() => {
+//       console.log('Database synced')
+//       defaultData()
+//     })
+//     .catch(err => console.log(err))
+// } else {
+//   db.sync({ force: true })
+//     .then(() => {
+//       if (process.env.NODE_ENV === 'production') {
+//         db.sync()
+//           .then(() => {
+//             console.log('Database synced')
+//             defaultData()
+//           })
+//           .catch(err => console.log(err))
+//       } else {
+//         db.sync({ force: true })
+//           .then(() => {
+//             console.log('Database synced')
+//             defaultData()
+//           })
+//           .catch(err => console.log(err))
+//       }
+//       console.log('Database synced')
+//       defaultData()
+//     })
+//     .catch(err => console.log(err))
+// }
+
+
+
+
 
 //para que el body de la peticion no salga undefined
 app.use(express.json());

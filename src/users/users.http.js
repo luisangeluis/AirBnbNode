@@ -36,7 +36,6 @@ const register = (req, res) => {
   if (!data) {
     return res.status(400).json({ message: 'Missing data' });
   }
-
   if (
     !data.firstName ||
     !data.lastName ||
@@ -44,22 +43,24 @@ const register = (req, res) => {
     !data.email ||
     !data.password ||
     !data.phone ||
-    !data.birthdayDate ||
-    !data.address
+    !data.birthdayDate
   ) {
     return res.status(400).json({
       message: 'All fields must be completed',
       fields: {
         firstName: 'string',
         lastName: 'string',
+        gender:'male',
         email: 'example@example.com',
         password: 'string',
-        birthdayDate: 'DD/MM/YYYY',
+        phone: '1234567890',
+        birthdayDate: 'YYYY/MM/DD',
       },
     });
   } else {
     userControllers.createUser(data)
       .then(response => {
+        console.log(response);
         res.status(201).json({
           message: `User created sucefully with id:${response.id}`,
           user: response,
@@ -68,7 +69,6 @@ const register = (req, res) => {
       .catch(err => {
         res.status(400).json({ message: err.errors[0].message })
       })
-
   }
 };
 
@@ -201,7 +201,7 @@ const getUserRole = (req, res) => {
       res.status(200).json(response);
     })
     .catch(error => {
-      res.status(400).json({ message: error})
+      res.status(400).json({ message: error })
     })
 }
 module.exports = {

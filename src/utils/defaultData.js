@@ -1,9 +1,9 @@
-const Accommodation_images = require("../models/accommodation_images.model");
-const Accommodations = require("../models/accommodations.model");
-const Places = require("../models/places.model");
-const Reservations = require("../models/reservations.model");
+// const Accommodation_images = require("../models/accommodation_images.model");
+// const Accommodations = require("../models/accommodations.model");
+// const Places = require("../models/places.model");
+// const Reservations = require("../models/reservations.model");
 const Users = require("../models/user.model");
-const Users_images = require("../models/users_images.model");
+// const Users_images = require("../models/users_images.model");
 const Roles = require("../models/roles.model");
 
 const generateData = async () => {
@@ -21,11 +21,11 @@ const generateData = async () => {
     email: "sahid.kick@academlo.com",
     password: "$2b$10$TNGcRFonQH98rVqFaBVfpOEEv2Xcu5ej14tWqKim3z3L6Tr.ZIaqC",
     phone: "1234567890",
-    birthdayDate: "22/10/2000",
+    birthdayDate: "2000/10/20",
     dni: "",
     address: "",
     roleId: "5ee551ed-7bf4-44b0-aeb5-daaa824b9473",
-    profileImage: "",
+    profileImage: "asd.com",
     status: "active",
     verified: false
   });
