@@ -11,13 +11,32 @@ module.exports = (passport) => {
   };
   passport.use(
     new JwtStrategy(opts, (decoded, done) => {
-      Users.find({ where: { id: decoded.id } }, (error, user) => {
-        if (error)
+      console.log('HOLA', decoded);
+      // Users.findOne({ where: { id: decoded.id } })
+      //   .then(res => {
+      //     if (res) {
+      //       return done(null, res);
+      //     } else {
+      //       return done(null, false);
+      //     }
+      //   })
+      //   .catch(error => {
+      //     if (error) {
+      //       return done(error, false);
+      //     }
+      //   })
+
+      Users.findOne({ where: { id: decoded.id } }, (error, user) => {
+        if (error) {
           return done(error, false);
-        if (user)
+
+        }
+        if (user) {
           return done(null, user);
-        else
+
+        } else {
           return done(null, false);
+        }
       })
     })
   );

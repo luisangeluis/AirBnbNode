@@ -1,20 +1,22 @@
-const {getUserByEmail} =require('../users/users.controllers');
+const { getUserByEmail } = require('../users/users.controllers');
 const { comparePassword } = require('../utils/crypt');
 // const {} =require('');
 
-const loginUser=(email,password)=>{
-  const user =getUserByEmail(email);
+const loginUser = async(email, password) => {
 
-  if(user){
-    const verify_password =comparePassword(password,user.password);
-    if(verify_password){
-      return user;
-    }
-  }
+  return await getUserByEmail(email)
+    .then(res => {
+      const verifyPassword = comparePassword(password, res.password);
+      if (verifyPassword)
+        return user;
 
-  return false;
+      return false;
+    })
+    .catch(errror => {
+      return false;
+    })
 }
 
-module.exports={
+module.exports = {
   loginUser
 }

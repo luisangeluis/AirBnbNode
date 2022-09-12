@@ -10,6 +10,8 @@ const getAllUsers = async () => {
       exclude: ['password']
     }
   });
+  
+
   return data;
 }
 
@@ -101,8 +103,8 @@ const getUserWithRole = async (userId) => {
     include:
     {
       model: Roles,
-      attributes:{
-        exclude: ['id', 'createdAt', 'updatedAt']
+      attributes: {
+        exclude: ['id', 'createdAt', 'updatedAt', 'password']
       }
     }
   })

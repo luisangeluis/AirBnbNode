@@ -30,7 +30,7 @@ const Accommodations = db.define('Accommodations', {
   hostId:{
     allowNull: false,
     type:DataTypes.UUID,
-    field: 'host_id'
+    field: 'userId'
     
   },
   score:{
@@ -40,7 +40,7 @@ const Accommodations = db.define('Accommodations', {
   placeId:{
     allowNull: false,
     type:DataTypes.UUID,
-    field:'place_id'
+    // field:'place_id'
   },
   commision:{
     allowNull: false,

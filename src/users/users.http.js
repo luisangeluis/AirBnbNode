@@ -50,7 +50,7 @@ const register = (req, res) => {
       fields: {
         firstName: 'string',
         lastName: 'string',
-        gender:'male',
+        gender: 'male',
         email: 'example@example.com',
         password: 'string',
         phone: '1234567890',
@@ -88,39 +88,22 @@ const remove = (req, res) => {
 const edit = (req, res) => {
   const id = req.params.id;
   const data = req.body;
+  const userRole = req.user.role;
 
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
-  } else if (
-    !data.first_name ||
-    !data.last_name ||
-    !data.email ||
-    !data.phone ||
-    !data.rol ||
-    !data.profile_image ||
-    !data.birthday_date ||
-    !data.active
-  ) {
-    return res.status(400).json({
-      message: 'All fields must be completed',
-      fields: {
-        first_name: 'string',
-        last_name: 'string',
-        email: 'example@example.com',
-        phone: '+521234567890',
-        rol: 'normal',
-        profile_image: 'example.com/image/example.png',
-        birthday_date: 'DD/MM/YYYY',
-        active: true,
-      },
-    });
   } else {
-    const response = userControllers.editUser(id, data);
-
-    res.status(200).json({
-      message: 'User edited succesfully',
-      user: response,
-    });
+    userControllers.editUser(id, data, userRole)
+      .then(response =>{
+        return response.status(200).json({
+          message: 'User edited succesfully',
+          user: response,
+        });
+      })
+      .catch(error=>{
+        return res.status(400).json({message:error.errors[0].message})
+      })
+    
   }
 };
 

@@ -8,8 +8,9 @@ const initModels = require('./models/init.models');
 const defaultData = require('./utils/defaultData');
 
 //Archivos de rutas
-const usersRouter = require('./users/users.routes').router
-const authRouter = require('./auth/auth.routes').router
+const usersRouter = require('./users/users.routes').router;
+const authRouter = require('./auth/auth.routes').router;
+const accommodationsRouter =require('./accommodations/accommodations.routes').router;
 
 //Configuraciones iniciales
 const { db } = require('./utils/database');
@@ -21,7 +22,7 @@ db.authenticate()
   .then(res => console.log('database autenticate'))
   .catch(error => console.log(error))
 
-{force:true}// es solo para desarrollo.
+//{force:true}// es solo para desarrollo.
 if (process.env.NODE_ENV === 'production') {
   db.sync()
     .then(() => {
@@ -39,43 +40,6 @@ if (process.env.NODE_ENV === 'production') {
     .catch(error => console.log(error))
 }
 
-
-
-// if (process.env.NODE_ENV === 'production') {
-//   db.sync()
-//     .then(() => {
-//       console.log('Database synced')
-//       defaultData()
-//     })
-//     .catch(err => console.log(err))
-// } else {
-//   db.sync({ force: true })
-//     .then(() => {
-//       if (process.env.NODE_ENV === 'production') {
-//         db.sync()
-//           .then(() => {
-//             console.log('Database synced')
-//             defaultData()
-//           })
-//           .catch(err => console.log(err))
-//       } else {
-//         db.sync({ force: true })
-//           .then(() => {
-//             console.log('Database synced')
-//             defaultData()
-//           })
-//           .catch(err => console.log(err))
-//       }
-//       console.log('Database synced')
-//       defaultData()
-//     })
-//     .catch(err => console.log(err))
-// }
-
-
-
-
-
 //para que el body de la peticion no salga undefined
 app.use(express.json());
 
@@ -85,6 +49,8 @@ app.get('/', verbMiddleware, (req, res) => {
 
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/accommodations',accommodationsRouter);
+
 
 app.get("/api/v1/uploads/:imgName", (req, res) => {
   const imgName = req.params.imgName;
