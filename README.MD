@@ -89,4 +89,6 @@
 /:id/available/?arrival=value&departure=value
 - GET
 
+<!-- TODO instalar swagger-ui-express para documentar -->
+
 

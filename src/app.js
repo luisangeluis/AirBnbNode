@@ -1,16 +1,20 @@
 //Dependencies
 const express = require('express');
 const passport = require('passport');
+const swaggerUi = require('swagger-ui-express');
 const { verbMiddleware } = require('./middleware/examples/verbs');
-require('./middleware/auth.middleware')(passport);
 const path = require('path');
-const initModels = require('./models/init.models');
-const defaultData = require('./utils/defaultData');
+require('./middleware/auth.middleware')(passport);
+
 
 //Archivos de rutas
 const usersRouter = require('./users/users.routes').router;
 const authRouter = require('./auth/auth.routes').router;
 const accommodationsRouter =require('./accommodations/accommodations.routes').router;
+
+const initModels = require('./models/init.models');
+const defaultData = require('./utils/defaultData');
+const swaggerDoc = require('./swagger.json');
 
 //Configuraciones iniciales
 const { db } = require('./utils/database');
@@ -50,6 +54,7 @@ app.get('/', verbMiddleware, (req, res) => {
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/accommodations',accommodationsRouter);
+app.use('/v1/doc',swaggerUi.serve,swaggerUi.setup(swaggerDoc));
 
 
 app.get("/api/v1/uploads/:imgName", (req, res) => {

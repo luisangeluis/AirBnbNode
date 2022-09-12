@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Rest Clon de Airbnb",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "api/v1/users": {
+      "get": {
+        "description": "Get all mi users",
+        "tags": [
+          "Users",
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "We successfully get all users"
+          },
+          "400": {
+            "description": "We get an error if the request is not resolved"
+          }
+        }
+      }
+    },
+    "api/v1/users/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del usuario",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "Get one user by Id",
+        "tags": [
+          "Users",
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "We successfully get one user"
+          },
+          "400": {
+            "description": "We get an error if the request is not resolved"
+          }
+        }
+      }
+    }
+  }
+}
