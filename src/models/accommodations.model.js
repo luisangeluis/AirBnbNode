@@ -29,7 +29,7 @@ const Accommodations = db.define('Accommodations', {
   },
   hostId:{
     allowNull: false,
-    type:DataTypes.UUID,
+    type:DataTypes.UUID,  
     field: 'userId'
     
   },

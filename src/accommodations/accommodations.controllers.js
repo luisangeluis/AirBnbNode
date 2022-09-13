@@ -25,19 +25,41 @@ const getAccommodationById = async (id) => {
     attributes: {
       exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
     },
-    include: {
-      model: Places,
-      attributes: {
-        exclude: ['createdAt', 'updatedAt']
+    include: [
+      {
+        model: Places,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
+      },
+      {
+        model:Users,
+        as:'user',
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
       }
-    }
+    ]
   })
   return data;
 }
 
 
+const createAccommodation = async (hostId, placeId, data) => {
+  const newAccommodation = await Accommodations.create({
+    ...data,
+    id: uuid.v4(),
+    hostId: hostId,
+    score: 0.00,
+    placeId: placeId,
+  })
+
+  return newAccommodation;
+}
+
 module.exports = {
   getAllAccommodations,
-  getAccommodationById
+  getAccommodationById,
+  createAccommodation
 }
 

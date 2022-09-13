@@ -54,16 +54,17 @@ const createUser = async (data) => {
   return newUser;
 }
 
-const editUser = async (userId, data, userRol) => {
-  console.log('holaaaaaaaaaaaaaaa');
+const editUser = async (userId, data, userRole) => {
   const { id, password, verified, roleId, ...restOfProperties } = data;
-  if ('5ee551ed-7bf4-44b0-aeb5-daaa824b9473' === userRol) {
+
+  if ('5ee551ed-7bf4-44b0-aeb5-daaa824b9473' === userRole) {
     const response = await Users.update({ ...restOfProperties, roleId }, { where: { id: userId } });
     return response;
   } else {
     const response = await Users.update(restOfProperties, { where: { id: userId } });
     return response;
   }
+
 }
 
 const deleteUser = async (id) => {

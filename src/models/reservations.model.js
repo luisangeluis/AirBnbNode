@@ -7,6 +7,11 @@ const Reservations = db.define('reservations',{
     type: DataTypes.UUID,
     allowNull: false
   },
+  userId: {
+    allowNull: false,
+    type: DataTypes.UUID,
+    field: "user_id",
+  },
   title:{
     type: DataTypes.UUID,
     allowNull:false
