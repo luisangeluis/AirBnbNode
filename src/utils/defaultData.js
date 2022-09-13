@@ -19,7 +19,7 @@ const generateData = async () => {
     lastName: "Kick",
     gender: "male",
     email: "sahid.kick@academlo.com",
-    password: "$2b$10$SZHHs.ZR3OuleUWAbrQJNe1jI9k2C1VSiUo5oFnr.SqypJksMpyJC",
+    password: "$2b$10$zrPhM0AoedA1RJg3C0fL7uWg8Qf/9aoCfwKknQKulg5Iz3tiJKIHK",
     phone: "1234567890",
     birthdayDate: "2000/10/20",
     dni: "",

@@ -1,5 +1,4 @@
 const Users = require("../models/user.model");
-const { getUserById } = require("../users/users.controllers");
 
 const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
@@ -11,29 +10,12 @@ module.exports = (passport) => {
   };
   passport.use(
     new JwtStrategy(opts, (decoded, done) => {
-      console.log('HOLA', decoded);
-      // Users.findOne({ where: { id: decoded.id } })
-      //   .then(res => {
-      //     if (res) {
-      //       return done(null, res);
-      //     } else {
-      //       return done(null, false);
-      //     }
-      //   })
-      //   .catch(error => {
-      //     if (error) {
-      //       return done(error, false);
-      //     }
-      //   })
-
       Users.findOne({ where: { id: decoded.id } }, (error, user) => {
         if (error) {
           return done(error, false);
-
         }
         if (user) {
-          return done(null, user);
-
+          return done(null, decoded);
         } else {
           return done(null, false);
         }

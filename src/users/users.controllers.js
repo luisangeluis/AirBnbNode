@@ -55,6 +55,7 @@ const createUser = async (data) => {
 }
 
 const editUser = async (userId, data, userRol) => {
+  console.log('holaaaaaaaaaaaaaaa');
   const { id, password, verified, roleId, ...restOfProperties } = data;
   if ('5ee551ed-7bf4-44b0-aeb5-daaa824b9473' === userRol) {
     const response = await Users.update({ ...restOfProperties, roleId }, { where: { id: userId } });
@@ -76,7 +77,12 @@ const deleteUser = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-  const response = await Users.findOne({ where: { email } });
+  const response = await Users.findOne({
+     where: { email },
+     attributes:{
+      exclude:['createdAt','updatedAt','roleId']
+     }
+  });
   return response;
 }
 

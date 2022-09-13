@@ -88,7 +88,7 @@ const remove = (req, res) => {
 const edit = (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  const userRole = req.user.role;
+  const userRole = req.user.roleId;
 
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
