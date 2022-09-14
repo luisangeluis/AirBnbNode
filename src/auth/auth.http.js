@@ -11,13 +11,18 @@ const login = (req, res) => {
 
   loginUser(data.email, data.password)
     .then(response => {
+      if (response) {
+        const token = jwt.sign({
+          id: response.id,
+          email: response.email,
+          roleId: response.roleId
+        }, 'academlo');
 
-      const token = jwt.sign({
-        id: response.id,
-        email: response.email,
-        roleId: response.roleId
-      }, 'academlo');
-      return res.status(200).json({ message: 'Tus credenciales son correctas', token: token });
+        return res.status(200).json({ message: 'Tus credenciales son correctas', token: token });
+      } else {
+        return res.status(401).json({ message: "Invalid Credentials" });
+      }
+
 
     })
     .catch(error => {

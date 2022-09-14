@@ -5,14 +5,16 @@ const roleAdminMiddleware = (req, res, next) => {
 
   Role.findOne({where: {name: "admin",}})
     .then((response) => { //? select * from roles where name = 'admin'
-      const rol = req.user.rol;
+      const role = req.user.roleId;
+      // console.log('ROLE ID DEL TOKEN',role);
 
-      if (rol === response.id) {
+      console.log(req.user);
+      if (role === response.id) {
         next();
       } else {
         res.status(401).json({
           status: "error",
-          message: "User not authorized to make this request",
+          message: "User not authorized to make this ",
         });
       }
 

@@ -1,8 +1,18 @@
 const reservationsControllers = require('./reservations.controllers');
 
+const getAll=()=>{
+  reservationsControllers.getAllReservations()
+    .then(response=>{
+      res.status(200).json({items:response.length,items:response})
+    })
+    .catch(error=>{
+      res.status(400).json({error})
+    })
+}
+
 const postReservation=(req,res)=>{
   const accommodationId = req.params.id;
-  const userId = req.user.id;
+  const userId = req.user.id; 
   const data = req.body;
 
   reservationsControllers.createReservation(userId,accommodationId,data)
@@ -16,5 +26,6 @@ const postReservation=(req,res)=>{
 }
 
 module.exports={
-  postReservation
+  postReservation,
+  getAll
 }

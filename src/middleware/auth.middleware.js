@@ -10,11 +10,12 @@ module.exports = (passport) => {
     secretOrKey: "academlo" // debe estar en una variable de entorno
   };
   passport.use(
-    new JwtStrategy(opts, (decoded, done) => {
+    new JwtStrategy(opts, async (decoded, done) => {
       try {
         const response = await getUserById(decoded.id);
 
-        if (!response) return done(null, false);
+        console.log('hola');
+        if (!response) {return done(null, false);}
 
         return done(null, decoded);
 

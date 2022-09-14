@@ -78,10 +78,10 @@ const deleteUser = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-  const response = await Users.findOne({
+  const response =await Users.findOne({
      where: { email },
      attributes:{
-      exclude:['createdAt','updatedAt','roleId']
+      exclude:['createdAt','updatedAt']
      }
   });
   return response;

@@ -67,7 +67,7 @@ const register = (req, res) => {
         })
       })
       .catch(err => {
-        res.status(400).json({ message: err.errors[0].message })
+        res.status(400).json({ err })
       })
   }
 };
@@ -95,13 +95,10 @@ const edit = (req, res) => {
   } else {
     userControllers.editUser(id, data, userRole)
       .then(response =>{
-        return response.status(200).json({
-          message: 'User edited succesfully',
-          user: response,
-        });
+         res.status(200).json({message: `User with id:${id} edited succesfully`});
       })
       .catch(error=>{
-        return res.status(400).json({message:error.errors[0].message})
+         res.status(400).json(error)
       })
     
   }
