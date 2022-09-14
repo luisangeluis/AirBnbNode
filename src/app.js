@@ -11,6 +11,7 @@ require('./middleware/auth.middleware')(passport);
 const usersRouter = require('./users/users.routes').router;
 const authRouter = require('./auth/auth.routes').router;
 const accommodationsRouter =require('./accommodations/accommodations.routes').router;
+const reservationsRouter = require('./reservations/reservations.routes').router;
 
 const initModels = require('./models/init.models');
 const defaultData = require('./utils/defaultData');
@@ -54,6 +55,7 @@ app.get('/', verbMiddleware, (req, res) => {
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/accommodations',accommodationsRouter);
+app.use('/api/v1/reservations',reservationsRouter);
 app.use('/v1/doc',swaggerUi.serve,swaggerUi.setup(swaggerDoc));
 
 

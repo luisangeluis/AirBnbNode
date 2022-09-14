@@ -1,6 +1,6 @@
 const reservationsControllers = require('./reservations.controllers');
 
-const getAll=()=>{
+const getAll=(req,res)=>{
   reservationsControllers.getAllReservations()
     .then(response=>{
       res.status(200).json({items:response.length,items:response})

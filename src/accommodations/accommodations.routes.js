@@ -16,4 +16,7 @@ router.route('/:id')
 router.route('/:id/make-reservation')
   .post(passport.authenticate('jwt',{session:false}), reservationsServices.postReservation);
 
+// router.route('/me')
+//   .get()
+
 exports.router = router;
