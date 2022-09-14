@@ -20,8 +20,14 @@ const initModels=()=>{
   Accommodations.belongsTo(Users);
 
   // Users<->Accommodations
-  Users.belongsToMany(Accommodations, { through: Reservations });
-  Accommodations.belongsToMany(Users, { through: Reservations });
+  // Users.belongsToMany(Accommodations, { through: Reservations });
+  // Accommodations.belongsToMany(Users, { through: Reservations });
+
+  Users.hasMany(Reservations)
+  Reservations.belongsTo(Users)
+
+  Accommodations.hasMany(Reservations)
+  Reservations.belongsTo(Accommodations)
 
   //Accommodations<-Places
   Places.hasMany(Accommodations);

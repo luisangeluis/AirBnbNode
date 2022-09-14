@@ -15,6 +15,8 @@ const postReservation=(req,res)=>{
   const userId = req.user.id; 
   const data = req.body;
 
+  // console.log('userId',userId);
+  console.log('accommodationId', accommodationId);
   reservationsControllers.createReservation(userId,accommodationId,data)
     .then(response=>{
       res.status(201).json(response)
