@@ -21,6 +21,8 @@ const getById =(req,res)=>{
     });
 }
 
+
+
 module.exports={
   getAll,
   getById
