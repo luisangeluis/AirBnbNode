@@ -92,6 +92,4 @@
 /:id/make-reservation
 - POST
 
-<!-- TODO instalar swagger-ui-express para documentar -->
-
 

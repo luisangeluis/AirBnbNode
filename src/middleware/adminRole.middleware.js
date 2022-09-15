@@ -5,11 +5,11 @@ const roleAdminMiddleware = (req, res, next) => {
 
   Role.findOne({where: {name: "admin",}})
     .then((response) => { //? select * from roles where name = 'admin'
-      const role = req.user.roleId;
-      // console.log('ROLE ID DEL TOKEN',role);
+      const roleId = req.user.roleId;
+      // console.log('ROLE ID DEL TOKEN',roleId);
 
-      console.log(req.user);
-      if (role === response.id) {
+      // console.log(req.user);
+      if (roleId === response.id) {
         next();
       } else {
         res.status(401).json({
@@ -34,7 +34,7 @@ const roleAdminMiddleware = (req, res, next) => {
   // }
 }
 
-const roleHostMiddleware =()=>{
+const roleHostMiddleware =(req,res,next)=>{
   Role.findOne({where: {name: "host",}})
     .then((response) => { //? select * from roles where name = 'admin'
       const rol = req.user.rol;

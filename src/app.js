@@ -19,6 +19,7 @@ const swaggerDoc = require('./swagger.json');
 
 //Configuraciones iniciales
 const { db } = require('./utils/database');
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 initModels();
@@ -70,8 +71,8 @@ app.get('/ejemplo',
     res.status(200).json({ message: 'Felicidades, tienes credenciales para entrar aqui', email: req.user.email });
   })
 
-app.listen(3000, () => {
-  console.log('server started at port:3000');
+app.listen(PORT, () => {
+  console.log(`server started at port:${PORT}`);
 });
 
 //FORMAS DE EXPORTAR

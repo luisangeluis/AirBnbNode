@@ -20,7 +20,7 @@ const postReservation=(req,res)=>{
 const getAll=(req,res)=>{
   reservationsControllers.getAllReservations()
     .then(response=>{
-      res.status(200).json({items:response.length,items:response})
+      res.status(200).json({items:response.length,reservations:response})
     })
     .catch(error=>{
       res.status(400).json({error})
@@ -44,13 +44,13 @@ const getAllMyReservations=(req,res)=>{
     }); 
 }
 
-const getMyReservation=(req,res)=>{
-  const userId = req.user.id;
-  const reservationId = req.params.id;
+// const getMyReservation=(req,res)=>{
+//   const userId = req.user.id;
+//   const reservationId = req.params.id;
 
-  //TO DO
+//   //TO DO
 
-}
+// }
 
 module.exports={
   postReservation,

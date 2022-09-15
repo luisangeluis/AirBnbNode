@@ -18,10 +18,7 @@ const Reservations = db.define('reservations',{
       key: 'id'
     }
   },
-  title:{
-    type: DataTypes.STRING,
-    allowNull:false
-  },
+  
   arrival:{
     type:DataTypes.DATE,
     allowNull:false

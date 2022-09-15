@@ -2,10 +2,12 @@ const router =require('express').Router();
 const reservationsServices =require('./reservations.http');
 //Pasport
 const passport = require('passport');
+const { roleAdminMiddleware } = require('../middleware/adminRole.middleware');
+
 require('../middleware/auth.middleware')(passport);
 
 router.route('/')
-  .get(reservationsServices.getAll);
+  .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware,reservationsServices.getAll);
 
 router.route('/my-reservations')
   .get(passport.authenticate('jwt', { session: false }),reservationsServices.getAllMyReservations)

@@ -48,6 +48,8 @@ const updateReservation = async (reservationId, data) => {
     { where: { id: reservationId } },
     restOfData
   )
+
+  return response;
 }
 
 const getAllReservationsByUserId = async (userId) => {

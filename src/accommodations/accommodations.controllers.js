@@ -33,8 +33,8 @@ const getAccommodationById = async (id) => {
         }
       },
       {
-        model:Users,
-        as:'user',
+        model: Users,
+        as: 'user',
         attributes: {
           exclude: ['createdAt', 'updatedAt']
         }
@@ -57,9 +57,25 @@ const createAccommodation = async (hostId, placeId, data) => {
   return newAccommodation;
 }
 
+const updateAccommodation = async (accommodationId, data) => {
+  const { id, hostId, score, ...restOfData } = data;
+  const response = await Accommodations.update(
+    restOfData,
+    { where: { id: accommodationId } }
+  )
+  return response;
+}
+
+const deleteAccommodation = async (accommodationId) => {
+  const response = await Accommodations.destroy({where:{id:accommodationId}});
+
+  return response
+}
 module.exports = {
   getAllAccommodations,
   getAccommodationById,
-  createAccommodation
+  createAccommodation,
+  updateAccommodation,
+  deleteAccommodation
 }
 
