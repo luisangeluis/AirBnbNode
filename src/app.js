@@ -19,7 +19,7 @@ const swaggerDoc = require('./swagger.json');
 
 //Configuraciones iniciales
 const { db } = require('./utils/database');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
 initModels();
