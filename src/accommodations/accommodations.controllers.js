@@ -58,7 +58,7 @@ const createAccommodation = async (hostId, placeId, data) => {
 }
 
 const updateAccommodation = async (accommodationId, data) => {
-  const { id, hostId, score, ...restOfData } = data;
+  const { id, hostId, score, placeId, ...restOfData } = data;
   const response = await Accommodations.update(
     restOfData,
     { where: { id: accommodationId } }
@@ -67,15 +67,36 @@ const updateAccommodation = async (accommodationId, data) => {
 }
 
 const deleteAccommodation = async (accommodationId) => {
-  const response = await Accommodations.destroy({where:{id:accommodationId}});
+  const response = await Accommodations.destroy({ where: { id: accommodationId } });
 
   return response
 }
+
+const getAllMyAccommodations = async (userId) => {
+  const response = await Accommodations.findAll({
+    where: { hostId: userId },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
+    },
+    include: [
+      {
+        model: Places,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
+      }
+    ]
+  })
+
+  return response;
+}
+
 module.exports = {
   getAllAccommodations,
   getAccommodationById,
   createAccommodation,
   updateAccommodation,
-  deleteAccommodation
+  deleteAccommodation,
+  getAllMyAccommodations
 }
 

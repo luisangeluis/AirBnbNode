@@ -30,6 +30,23 @@ const generateData = async () => {
     verified: false
   });
 
+  await Users.create({
+    id: "3bd244ca-7a80-4f1f-9732-019871f53a54",
+    firstName: "Luis",
+    lastName: "Zepeda",
+    gender: "male",
+    email: "luis@academlo.com",
+    password: "$2b$10$zrPhM0AoedA1RJg3C0fL7uWg8Qf/9aoCfwKknQKulg5Iz3tiJKIHK",
+    phone: "1234567890",
+    birthdayDate: "2000/10/20",
+    dni: "",
+    address: "",
+    roleId: "97006fe0-4a35-47f4-bfbf-fc962e5fe500",
+    profileImage: "asd.com",
+    status: "active",
+    verified: false
+  });
+
   await Places.bulkCreate([
     {
       id: '864ee3c2-facd-4a23-8b4a-4e9d342d9036',
@@ -84,7 +101,7 @@ const generateData = async () => {
     beds: 3,
     bathrooms: 4.5,
     price: 1536.00,
-    hostId: '74cd6011-7e76-4d6d-b25b-1d6e4182ec2f',
+    hostId: '3bd244ca-7a80-4f1f-9732-019871f53a54',
     score: 0.00,
     placeId: '9c0412b6-7d56-4347-8fbe-5455e8a42438',
     commision: 150.00

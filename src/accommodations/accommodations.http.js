@@ -17,7 +17,7 @@ const getById = (req, res) => {
       return res.status(200).json(response);
     })
     .catch(error => {
-      return res.status(404).json({ message: `The user with id:${id} doesn't exist` });
+      return res.status(404).json({ message: `The Accommodation with id:${id} doesn't exist` });
     });
 }
 
@@ -44,28 +44,61 @@ const editAccomodation = (req, res) => {
     })
 }
 
-const remove =(req,res)=>{
+const remove = (req, res) => {
   const accommodationid = req.params.id;
 
   Accommodations.deleteAccommodation(accommodationid)
-    .then(response=>{
+    .then(response => {
       if (response) {
         return res.status(204).json();
       }
       else {
-        return res.status(400).json({ message: 'Invalid Id' });
+        return res.status(404).json({ message: 'Invalid Id' });
       }
     })
-    .catch(error=>{
+    .catch(error => {
       return res.status(400).json(error.message);
-    } )
+    })
 }
 
+const getMyAccommodations = (req, res) => {
+  const userId = req.user.id;
 
+  Accommodations.getAllMyAccommodations(userId)
+    .then(response => {
+      if (response) {
+        return res.status(200).json({ items: response.length, response })
+      } else {
+        return res.status(400).json({ message: `The user with id ${userId} doesn't exist` })
+      }
+    })
+    .catch(error => {
+      return res.status(400).json({ message: error.message })
+    })
+}
+
+const getMyAccommodation = (req, res) => {
+  const accommodationId = req.params.id;
+
+  Accommodations.getAccommodationById(accommodationId)
+    .then(response => {
+      if (response) {
+        res.status(200).json(response)
+      } else {
+        return res.status(404).json({ message: `The Accommodation with id:${id} doesn't exist` });
+      }
+    })
+    .catch(error => {
+      return res.status(400).json(error.message);
+    })
+}
 
 module.exports = {
   getAll,
   getById,
   editAccomodation,
-  remove
+  remove,
+  getMyAccommodations,
+  getMyAccommodation,
+  
 }

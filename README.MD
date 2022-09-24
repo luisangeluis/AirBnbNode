@@ -63,7 +63,8 @@
 1. Ver los lugares
 2. Puede ver la informacion de un lugar.
 3. Reservar.
-4. Dar un score una vez finalizada la reservación.
+<!-- TO DO Hacer score -->
+4. Dar un score una vez finalizada la reservación. 
 5. Puede ver perfiles de usuario.
 6. Editar el lugar.
 7. Puede eliminar el lugar.
