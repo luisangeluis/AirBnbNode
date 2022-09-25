@@ -91,12 +91,50 @@ const getAllMyAccommodations = async (userId) => {
   return response;
 }
 
+const getMyAccommodationById = async (hostId, accommodationId) => {
+  const response = Accommodations.findOne({
+    where: {
+      hostId: hostId,
+      id: accommodationId
+    }
+  })
+
+  return response;
+
+}
+
+const deleteMyAccommodationById = async (hostId, accommodationId) => {
+
+  const response = await Accommodations.destroy({
+    where: { hostId: hostId, id: accommodationId }
+  })
+
+  return response;
+}
+
+const editMyAccommodationById = async (hostId, accommodationId, data) => {
+  const { id, hostId, score, placeId, ...restOfData } = data;
+  const response = await Accommodations.update(
+    restOfData,
+    {
+      where: {
+        hostId: hostId,
+        id:accommodationId
+      }
+    }
+  )
+
+  return response;
+}
 module.exports = {
   getAllAccommodations,
   getAccommodationById,
   createAccommodation,
   updateAccommodation,
   deleteAccommodation,
-  getAllMyAccommodations
+  getAllMyAccommodations,
+  getMyAccommodationById,
+  deleteMyAccommodationById,
+  editMyAccommodationById
 }
 

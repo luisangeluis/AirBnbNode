@@ -3,7 +3,6 @@ const passport = require('passport');
 
 const { roleAdminMiddleware, roleHostMiddleware } = require('../middleware/adminRole.middleware');
 
-
 const accommodationsServices = require('./accommodations.http')
 const reservationsServices = require('../reservations/reservations.http');
 
@@ -20,8 +19,8 @@ router.route('/my-accommodations')
 
 router.route('/my-accommodations/:id')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.getMyAccommodation)
-  .delete(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.remove)
-  .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.editAccomodation)
+  .delete(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.deleteMyAccommodation)
+  .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.editMyAccommodation)
 
 router.route('/:id')
   .get(accommodationsServices.getById)

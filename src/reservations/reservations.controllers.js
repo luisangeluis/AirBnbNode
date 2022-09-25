@@ -73,6 +73,7 @@ const getMyReservationByUserId = async (userId,reservationId) => {
 
 module.exports = {
   getAllReservations,
+  getReservationById,
   createReservation,
   getAllReservationsByUserId,
   updateReservation,
