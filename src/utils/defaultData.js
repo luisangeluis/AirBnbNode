@@ -1,7 +1,7 @@
 // const Accommodation_images = require("../models/accommodation_images.model");
 const Accommodations = require("../models/accommodations.model");
 const Places = require("../models/places.model");
-// const Reservations = require("../models/reservations.model");
+const Reservations = require("../models/reservations.model");
 const Users = require("../models/user.model");
 // const Users_images = require("../models/users_images.model");
 const Roles = require("../models/roles.model");
@@ -105,6 +105,17 @@ const generateData = async () => {
     score: 0.00,
     placeId: '9c0412b6-7d56-4347-8fbe-5455e8a42438',
     commision: 150.00
+  })
+
+  await Reservations.create({
+    id:"0ef06465-3035-402f-b77b-d7f5d2a67fbe",
+    userId:"3bd244ca-7a80-4f1f-9732-019871f53a54",
+    arrival:"2020/10/10",
+    departure:"2020/10/10",
+    accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
+    adults:2
+
+
   })
 
 

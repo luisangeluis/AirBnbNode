@@ -112,13 +112,13 @@ const deleteMyAccommodationById = async (hostId, accommodationId) => {
   return response;
 }
 
-const editMyAccommodationById = async (hostId, accommodationId, data) => {
+const editMyAccommodationById = async (userId, accommodationId, data) => {
   const { id, hostId, score, placeId, ...restOfData } = data;
   const response = await Accommodations.update(
     restOfData,
     {
       where: {
-        hostId: hostId,
+        hostId: userId,
         id:accommodationId
       }
     }

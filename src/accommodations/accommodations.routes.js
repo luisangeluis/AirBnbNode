@@ -22,6 +22,11 @@ router.route('/my-accommodations/:id')
   .delete(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.deleteMyAccommodation)
   .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.editMyAccommodation)
 
+//Reservation Host  
+router.route('/my-accommodations/:id/host-reservations')
+  .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware,reservationsServices.getHostReservations)
+  
+
 router.route('/:id')
   .get(accommodationsServices.getById)
   .put(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, accommodationsServices.editAccomodation)

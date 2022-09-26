@@ -31,8 +31,6 @@ const postReservation = (req, res) => {
   const userId = req.user.id;
   const data = req.body;
 
-  // console.log('userId',userId);
-  console.log('accommodationId', accommodationId);
   reservationsControllers.createReservation(userId, accommodationId, data)
     .then(response => {
       res.status(201).json(response)
@@ -55,22 +53,34 @@ const getAllMyReservations = (req, res) => {
 
     })
     .catch(error => {
-      //TO DO REVISAR TIPO DE ERROR SI ENTRA  AL CATCH
       res.status(404).json({ status: 404, message: error.message })
     });
 }
 
-// const getMyReservation=(req,res)=>{
-//   const userId = req.user.id;
-//   const reservationId = req.params.id;
+//REVIS
+const getHostReservations =(req,res)=>{
+  // const hostId = req.user.id;
+  const accommodationId = req.params.id;
 
-//TO DO
+  console.log('El iD',accommodationId);
 
-// }
+  reservationsControllers.getAllMyHostReservartions(accommodationId)
+    .then(response=>{
+      if(response) return res.status(200).json(response)
+      
+      return res.status(404).json({ message: `The accommodation with id: ${id} doesn't exist` });
+
+    })
+    .catch(error=>{
+      return res.status(400).json({message:error.message})
+    })
+}
+
 
 module.exports = {
   getAll,
   getById,
   postReservation,
-  getAllMyReservations
+  getAllMyReservations,
+  getHostReservations
 }

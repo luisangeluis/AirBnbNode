@@ -60,15 +60,27 @@ const getAllReservationsByUserId = async (userId) => {
   return data;
 }
 
-const getMyReservationByUserId = async (userId,reservationId) => {
-  const data =Reservations.findOne({
-      where:{
-        id:reservationId,
-        userId:userId
-      }
+const getMyReservationByUserId = async (userId, reservationId) => {
+  const data = Reservations.findOne({
+    where: {
+      id: reservationId,
+      userId: userId
+    }
   })
 
   return data;
+}
+
+const getAllMyHostReservartions = async (accommodationId) => {
+  const response = await Reservations.findAll({
+    where: { accommodationId: accommodationId },
+    include: {
+      model: Accommodations,
+      
+    }
+  })
+
+  return response;
 }
 
 module.exports = {
@@ -77,5 +89,6 @@ module.exports = {
   createReservation,
   getAllReservationsByUserId,
   updateReservation,
-  getMyReservationByUserId
+  getMyReservationByUserId,
+  getAllMyHostReservartions
 }
