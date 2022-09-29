@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { db } = require('../utils/database');
 
-const Accommodations = db.define('Accommodations', {
+const Accommodations = db.define('accommodations', {
   id: {
     primaryKey: true,
     type: DataTypes.UUID,

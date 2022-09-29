@@ -107,6 +107,21 @@ const generateData = async () => {
     commision: 150.00
   })
 
+  await Accommodations.create({
+    id: "b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+    title: "premium - vistas 360 ciudad (alberca y gym)",
+    description: "asd",
+    guests: 6,
+    rooms: 3,
+    beds: 3,
+    bathrooms: 4.5,
+    price: 1536.00,
+    hostId: '74cd6011-7e76-4d6d-b25b-1d6e4182ec2f',
+    score: 0.00,
+    placeId: '9c0412b6-7d56-4347-8fbe-5455e8a42438',
+    commision: 150.00
+  })
+
   await Reservations.create({
     id:"0ef06465-3035-402f-b77b-d7f5d2a67fbe",
     userId:"3bd244ca-7a80-4f1f-9732-019871f53a54",
@@ -114,9 +129,25 @@ const generateData = async () => {
     departure:"2020/10/10",
     accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
     adults:2
-
-
   })
+
+  await Reservations.create({
+    id:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+    arrival:"2020/10/10",
+    departure:"2020/10/10",
+    accommodationId:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+    adults:2
+  })
+
+  // await Reservations.create({
+  //   id:"e0950302-8b09-4899-95a3-109c91e19454",
+  //   userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+  //   arrival:"2020/10/10",
+  //   departure:"2020/10/10",
+  //   accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
+  //   adults:2
+  // })
 
 
   

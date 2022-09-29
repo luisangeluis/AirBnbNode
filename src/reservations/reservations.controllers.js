@@ -71,13 +71,20 @@ const getMyReservationByUserId = async (userId, reservationId) => {
   return data;
 }
 
-const getAllMyHostReservartions = async (accommodationId) => {
+const getAllMyHostReservartions = async (hostId,accommodationId) => {
   const response = await Reservations.findAll({
     where: { accommodationId: accommodationId },
-    include: {
-      model: Accommodations,
-      
-    }
+
+    include: [
+      {
+        model: Accommodations,
+        where: { hostId },
+
+      },
+      {
+        model: Users,
+      }
+    ]
   })
 
   return response;

@@ -30,7 +30,7 @@ const Reservations = db.define('reservations',{
   accommodationId:{
     type:DataTypes.UUID,
     allowNull:false,
-    field:'accommodation_id',
+    field:"accommodation_id",
     references: {
       model: Accomodations,
       key: 'id'

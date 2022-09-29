@@ -59,12 +59,12 @@ const getAllMyReservations = (req, res) => {
 
 //REVIS
 const getHostReservations =(req,res)=>{
-  // const hostId = req.user.id;
+  const hostId = req.user.id;
   const accommodationId = req.params.id;
 
   console.log('El iD',accommodationId);
 
-  reservationsControllers.getAllMyHostReservartions(accommodationId)
+  reservationsControllers.getAllMyHostReservartions(hostId,accommodationId)
     .then(response=>{
       if(response) return res.status(200).json(response)
       
