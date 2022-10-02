@@ -23,8 +23,8 @@ router.route('/my-accommodations/:id')
   .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware,accommodationsServices.editMyAccommodation)
 
 //Reservation Host  
-router.route('/my-accommodations/:id/host-reservations')
-  .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware,reservationsServices.getHostReservations)
+// router.route('/my-accommodations/:id/host-reservations')
+//   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware,reservationsServices.getHostReservations)
   
 
 router.route('/:id')

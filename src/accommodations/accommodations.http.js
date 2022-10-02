@@ -134,6 +134,30 @@ const editMyAccommodation =(req,res)=>{
     })
 }
 
+const editMyAccommodationAndImage =(req,res)=>{
+  const hostId = req.user.id;
+  const accommodationId = req.params.id;
+  const data = req.body;
+
+  if (!Object.keys(data).length) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
+
+  Accommodations.editMyAccommodationById(hostId,accommodationId,data)
+    .then(response=>{
+      if(response){
+        return res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
+      }else{
+        return res.status(404).json({ message: `The accommodation with id:${accommodationId} doesn't exist` })
+
+      }
+    })
+    .catch(error=>{
+      return res.status(400).json({message:error.message})
+
+    })
+}
+
 module.exports = {
   getAll,
   getById,
@@ -142,5 +166,6 @@ module.exports = {
   getMyAccommodations,
   getMyAccommodation,
   deleteMyAccommodation,
-  editMyAccommodation
+  editMyAccommodation,
+  editMyAccommodationAndImage
 }

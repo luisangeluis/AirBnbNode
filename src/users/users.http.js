@@ -94,13 +94,13 @@ const edit = (req, res) => {
     return res.status(400).json({ message: 'Missing data' });
   } else {
     userControllers.editUser(id, data, userRole)
-      .then(response =>{
-         res.status(200).json({message: `User with id:${id} edited succesfully`});
+      .then(response => {
+        res.status(200).json({ message: `User with id:${id} edited succesfully` });
       })
-      .catch(error=>{
-         res.status(400).json(error)
+      .catch(error => {
+        res.status(400).json(error)
       })
-    
+
   }
 };
 
@@ -171,7 +171,6 @@ const postProfileImg = (req, res) => {
   const data = userControllers.editProfileImg(userId, imgPath);
 
   res.status(200).json(data);
-
 }
 
 const getUserRole = (req, res) => {

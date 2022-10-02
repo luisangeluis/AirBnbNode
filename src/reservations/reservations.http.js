@@ -58,21 +58,48 @@ const getAllMyReservations = (req, res) => {
 }
 
 //REVIS
-const getHostReservations =(req,res)=>{
+const getHostReservations = (req, res) => {
   const hostId = req.user.id;
   const accommodationId = req.params.id;
 
-  console.log('El iD',accommodationId);
+  console.log('El iD', accommodationId);
 
-  reservationsControllers.getAllMyHostReservartions(hostId,accommodationId)
-    .then(response=>{
-      if(response) return res.status(200).json(response)
-      
+  reservationsControllers.getAllMyHostReservartions(hostId, accommodationId)
+    .then(response => {
+      if (response) return res.status(200).json(response)
+
       return res.status(404).json({ message: `The accommodation with id: ${id} doesn't exist` });
 
     })
-    .catch(error=>{
-      return res.status(400).json({message:error.message})
+    .catch(error => {
+      return res.status(400).json({ message: error.message })
+    })
+}
+
+const getAllHostReservations = (req, res) => {
+  const hostId = req.user.id;
+
+  reservationsControllers.getAllMyHostReservartions(hostId)
+    .then(response => {
+      if (response) return res.status(200).json({ items: response.length, reservations: response })
+      else return res.status(404).json({ message: `The host with id ${hostId} doesn't exist` })
+    })
+    .catch(error => {
+      return res.status(400).json({ message: error.message })
+    })
+}
+
+const getHostReservationById = (req, res,) => {
+  const hostId = req.user.id;
+  const reservationId = req.params.reservationId;
+
+  reservationsControllers.getMyHostReservationById(hostId, reservationId)
+    .then(response => {
+      if (response) return res.status(200).json({ items: response.length, reservations: response })
+      else return res.status(404).json({ message: `The host with id ${hostId} doesn't exist` })
+    })
+    .catch(error => {
+      return res.status(400).json({ message: error.message })
     })
 }
 
@@ -82,5 +109,7 @@ module.exports = {
   getById,
   postReservation,
   getAllMyReservations,
-  getHostReservations
+  getHostReservations,
+  getAllHostReservations,
+  getHostReservationById
 }

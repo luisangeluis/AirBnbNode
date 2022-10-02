@@ -47,6 +47,23 @@ const generateData = async () => {
     verified: false
   });
 
+  await Users.create({
+    id: "ed7c09e4-84a1-45da-8097-387f6bd6f0ca",
+    firstName: "angel",
+    lastName: "gonzalez",
+    gender: "male",
+    email: "angel@academlo.com",
+    password: "$2b$10$zrPhM0AoedA1RJg3C0fL7uWg8Qf/9aoCfwKknQKulg5Iz3tiJKIHK",
+    phone: "1234567890",
+    birthdayDate: "2000/10/20",
+    dni: "",
+    address: "",
+    roleId: "97006fe0-4a35-47f4-bfbf-fc962e5fe500",
+    profileImage: "asd.com",
+    status: "active",
+    verified: false
+  });
+
   await Places.bulkCreate([
     {
       id: '864ee3c2-facd-4a23-8b4a-4e9d342d9036',
@@ -94,7 +111,7 @@ const generateData = async () => {
 
   await Accommodations.create({
     id: "7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
-    title: "premium - vistas 360 ciudad (alberca y gym)",
+    title: "propiedad de luis",
     description: "asd",
     guests: 6,
     rooms: 3,
@@ -109,7 +126,7 @@ const generateData = async () => {
 
   await Accommodations.create({
     id: "b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
-    title: "premium - vistas 360 ciudad (alberca y gym)",
+    title: "accommo propiedad de sahid",
     description: "asd",
     guests: 6,
     rooms: 3,
@@ -124,7 +141,25 @@ const generateData = async () => {
 
   await Reservations.create({
     id:"0ef06465-3035-402f-b77b-d7f5d2a67fbe",
+    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+    arrival:"2020/10/10",
+    departure:"2020/10/10",
+    accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
+    adults:2
+  })
+
+  await Reservations.create({
+    id:"bf0e8e8c-6af8-44dd-b1ab-b365a713bb2b",
     userId:"3bd244ca-7a80-4f1f-9732-019871f53a54",
+    arrival:"2020/10/10",
+    departure:"2020/10/10",
+    accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
+    adults:2
+  })
+
+  await Reservations.create({
+    id:"175859ed-9a4b-4dfa-8c10-714346d18531",
+    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
     arrival:"2020/10/10",
     departure:"2020/10/10",
     accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
