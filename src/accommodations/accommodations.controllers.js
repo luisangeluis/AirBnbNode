@@ -127,20 +127,22 @@ const editMyAccommodationById = async (userId, accommodationId, data) => {
   return response;
 }
 
-const editMyAccommodationAndImageById = async (userId, accommodationId, data) => {
-  const { id, hostId, score, placeId, ...restOfData } = data;
-  const response = await Accommodations.update(
-    restOfData,
-    {
-      where: {
-        hostId: userId,
-        id:accommodationId
-      }
-    }
-  )
+// const editMyAccommodationAndImageById = async (userId, accommodationId, data) => {
+//   const { id, hostId, score, placeId, ...restOfData } = data;
+//   const response = await Accommodations.update(
+//     restOfData,
+//     {
+//       where: {
+//         hostId: userId,
+//         id:accommodationId
+//       }
+//     }
+//   )
 
-  return response;
-}
+//   return response;
+// }
+
+
 
 module.exports = {
   getAllAccommodations,
@@ -151,6 +153,6 @@ module.exports = {
   getAllMyAccommodations,
   getMyAccommodationById,
   deleteMyAccommodationById,
-  editMyAccommodationById
+  // editMyAccommodationById
 }
 
