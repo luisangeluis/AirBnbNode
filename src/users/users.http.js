@@ -167,7 +167,7 @@ const removeMyUser = (req, res) => {
 
 const postProfileImg = (req, res) => {
   const userId = req.user.id;
-  const imgPath = req.hostname + ':8000' + '/api/v1/uploads/' + req.file.filename;
+  const imgPath = req.hostname + ':3000' + '/api/v1/uploads/' + req.file.originalname;
   const data = userControllers.editProfileImg(userId, imgPath);
 
   res.status(200).json(data);

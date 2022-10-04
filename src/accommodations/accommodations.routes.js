@@ -2,7 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 const { roleAdminMiddleware, roleHostMiddleware } = require('../middleware/adminRole.middleware');
-const { upload } = require('../utils/multer');
+const { accommodationsMulter } = require('../utils/multer');
 
 
 const accommodationsServices = require('./accommodations.http')
@@ -30,7 +30,8 @@ router.route('/my-accommodations/:id')
 //   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware,reservationsServices.getHostReservations)
 
 router.route('/my-accommodations/:id/post-image')
-  .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware, upload.single('accommodation_img'),
+  .post(passport.authenticate('jwt', { session: false }),
+    roleHostMiddleware, accommodationsMulter().single('accommodation_img'),
     accommodationsImages.sendImageMyAccommo)
 
 router.route('/:id')

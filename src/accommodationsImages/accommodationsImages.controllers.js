@@ -7,8 +7,9 @@ const postImageMyAccommodationById = async (hostId, accommodationId, data) => {
 
   //Personalizar los multers para cargar los archivos segun las necesidades del controller
   try {
-    const accommodation = await Accommodations.findOne({ where: { id: accommodationId, hostId } })
+    console.log('info de data',data);
 
+    const accommodation = await Accommodations.findOne({ where: { id: accommodationId, hostId } })
     if (accommodation) {
       const response = await AccommodationsImages.create({
         ...data,

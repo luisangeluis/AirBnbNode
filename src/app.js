@@ -65,6 +65,11 @@ app.get("/api/v1/uploads/:imgName", (req, res) => {
   res.status(200).sendFile(path.resolve('uploads/') + '/' + imgName)
 })
 
+app.get("/api/v1/uploadsimgsaccomm/:imgName", (req, res) => {
+  const imgName = req.params.imgName;
+  res.status(200).sendFile(path.resolve('uploadsImgsAccommo/') + '/' + imgName)
+})
+
 app.get('/ejemplo',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {

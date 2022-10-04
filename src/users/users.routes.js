@@ -2,7 +2,7 @@ const router = require('express').Router();
 //PARA PROTEGER LAS RUTAS
 const passport = require('passport');
 const { roleAdminMiddleware } = require('../middleware/adminRole.middleware');
-const { upload } = require('../utils/multer');
+const { usersMulter } = require('../utils/multer');
 require('../middleware/auth.middleware')(passport);
 
 const usersServices = require('./users.http');
@@ -18,7 +18,7 @@ router.route('/me')
   .delete(passport.authenticate('jwt', { session: false }), usersServices.removeMyUser);
 
 router.route('/me/profile-img')
-  .post(passport.authenticate('jwt', { session: false }),upload.single('profile_img'),usersServices.postProfileImg)
+  .post(passport.authenticate('jwt', { session: false }),usersMulter().single('profile_img'),usersServices.postProfileImg)
   // .get(passport.authenticate('jwt', { session: false }),);
 
 router.route('/:id')

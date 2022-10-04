@@ -10,7 +10,7 @@ const initModels=()=>{
   //? Users<-Roles
   Roles.hasMany(Users);
   Users.belongsTo(Roles);
-
+  
   //Users->UsersImages
   Users.hasMany(UsersImages);
   UsersImages.belongsTo(Users);
