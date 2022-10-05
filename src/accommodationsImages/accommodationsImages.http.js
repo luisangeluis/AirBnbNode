@@ -4,7 +4,7 @@ const sendImageMyAccommo = (req, res) => {
   const hostId = req.user.id;
   const accommodationId = req.params.id;
   // const url = req.hostname + ':3000' + '/api/v1/a/' + req.file.originalname;
-  const url = req.hostname + ':3000' + '/api/v1/a/' + 'hola';
+  const url = req.hostname  + '/api/v1/a/' + req.file.originalname;
 
   console.log('la URL:',url);
   console.log('req.file:',req.file);
@@ -23,7 +23,7 @@ const sendImageMyAccommo = (req, res) => {
         return res.status(404).json({ message: `Accommodation with id ${accommodationId} doesn't exist` })
     })
     .catch(error => {
-      return res.status(400).json({ message: error.message })
+      return res.status(400).json({ error })
     })
 }
 

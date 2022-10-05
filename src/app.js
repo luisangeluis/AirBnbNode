@@ -6,6 +6,8 @@ const { verbMiddleware } = require('./middleware/examples/verbs');
 const path = require('path');
 require('./middleware/auth.middleware')(passport);
 
+const {upload} = require('./utils/testMulter')
+
 
 //Archivos de rutas
 const usersRouter = require('./users/users.routes').router;
@@ -75,6 +77,10 @@ app.get('/ejemplo',
   (req, res) => {
     res.status(200).json({ message: 'Felicidades, tienes credenciales para entrar aqui', email: req.user.email });
   })
+
+app.post('/upload',upload.single('accommodationimg'),function(req,res){
+  res.status(200).json({message:'hola'})
+})
 
 app.listen(PORT, () => {
   console.log(`server started at port:${PORT}`);

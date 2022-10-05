@@ -17,8 +17,8 @@ router.route('/me')
   .get(passport.authenticate('jwt', { session: false }), usersServices.getMyUser)
   .delete(passport.authenticate('jwt', { session: false }), usersServices.removeMyUser);
 
-router.route('/me/profile-img')
-  .post(passport.authenticate('jwt', { session: false }),usersMulter().single('profile_img'),usersServices.postProfileImg)
+// router.route('/me/profile-img')
+//   .post(passport.authenticate('jwt', { session: false }),usersMulter().single('profile_img'),usersServices.postProfileImg)
   // .get(passport.authenticate('jwt', { session: false }),);
 
 router.route('/:id')

@@ -1,5 +1,5 @@
-const multer =require('multer');
-const path =require('path');
+const multer = require('multer');
+const path = require('path');
 
 // const storage =multer.diskStorage({
 //   destination:(req,file,cb)=>{
@@ -14,41 +14,47 @@ const path =require('path');
 
 // exports.upload =upload;
 
+// const storageAccommImg = multer({
+//   destination: (req, file, cb) => {
+//     // cb(null, path.resolve('uploads/'))
+//     cb(null, 'uploads/')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + '-' + file.originalname)
+//   }
+// })
 
+// const uploadAccommImg = multer({ storage:storageAccommImg });
+// module.exports = {
+//   usersMulter,
+//   accommodationsMulter
+// }
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+const upload = multer({ storage: storage })
 
-const usersMulter =()=>{
-  const storageUserImg =multer.diskStorage({
-    destination:(req,file,cb)=>{
-      cb(null,path.resolve('uploads/'))
+const uploadAccomm = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'imgsAccomm/')
     },
-    filename:(req,file,cb)=>{
-      cb(null,Date.now()+'-'+file.originalname)
+    filename: function (req, file, cb) {
+      // cb(null, file.fieldname + '-' + Date.now())
+      cb(null, Date.now() + '-' + file.originalname)
     }
   })
-  
-  const uploadUserImg =multer({storageUserImg});
-  
-  return uploadUserImg;
+  const upload = multer({ storage: storage })
+  return upload;
 }
 
+// exports.upload = upload;
 
-const accommodationsMulter =()=>{
-  const storageAccommImg =multer.diskStorage({
-    destination:(req,file,cb)=>{
-      cb(null,path.resolve('uploadsImgsAccomm/'))
-    },
-    filename:(req,file,cb)=>{
-      cb(null,Date.now()+'-'+file.originalname)
-    }
-  })
-
-  const uploadAccommImg =multer({storageAccommImg});
-  return uploadAccommImg;
-
+module.exports = {
+  uploadAccomm
 }
-
-module.exports={
-  usersMulter,
-  accommodationsMulter
-}
-
