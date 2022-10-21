@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 const Accommodations = require('../models/accommodations.model');
 const Places = require('../models/places.model');
 const Users = require('../models/user.model')
@@ -45,13 +47,12 @@ const getAccommodationById = async (id) => {
 }
 
 
-const createAccommodation = async (hostId, placeId, data) => {
+const createAccommodation = async (hostId , data) => {
   const newAccommodation = await Accommodations.create({
     ...data,
     id: uuid.v4(),
     hostId: hostId,
     score: 0.00,
-    placeId: placeId,
   })
 
   return newAccommodation;

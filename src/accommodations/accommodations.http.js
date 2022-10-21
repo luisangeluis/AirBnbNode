@@ -21,6 +21,40 @@ const getById = (req, res) => {
     });
 }
 
+const post = (req, res) => {
+  const data = req.body;
+  const userId =req.user.id;
+
+  if (!Object.keys(data).length) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
+
+  if (!data.title || !data.description || !data.guests || !data.bathrooms || !data.price || !data.placeId ||
+    !data.commision) {
+      return res.status(400).json({
+        message:'All fields must be completed',
+        fields:{
+          title:'Type a string',
+          description:'Type a string',
+          guests:'Type a num',
+          bathrooms:'Type a num',
+          price:'Type a price',
+          placeId: 'Type an id',
+          commision: 'Type a commision'
+        }
+      })
+  }
+
+  Accommodations.createAccommodation(userId,data)
+    .then(response => {
+      return res.status(201).json({
+        message: `Accommodation created successfully`,
+        accommodation: response
+      })
+    })
+    .catch(error => res.status(400).json({ message: error.message }))
+}
+
 const editAccomodation = (req, res) => {
   const accommodationId = req.params.id;
   const data = req.body;
@@ -102,15 +136,15 @@ const deleteMyAccommodation = (req, res) => {
       if (response) {
         return res.status(204).json();
       } else {
-        return res.status(404).json({message:`The accommodation with id: ${accommodationId} doesn't exist`})
+        return res.status(404).json({ message: `The accommodation with id: ${accommodationId} doesn't exist` })
       }
     })
     .catch(error => {
-      return res.status(400).json({message:error.message})
+      return res.status(400).json({ message: error.message })
     })
 }
 
-const editMyAccommodation =(req,res)=>{
+const editMyAccommodation = (req, res) => {
   const hostId = req.user.id;
   const accommodationId = req.params.id;
   const data = req.body;
@@ -119,17 +153,17 @@ const editMyAccommodation =(req,res)=>{
     return res.status(400).json({ message: 'Missing data' });
   }
 
-  Accommodations.editMyAccommodationById(hostId,accommodationId,data)
-    .then(response=>{
-      if(response){
+  Accommodations.editMyAccommodationById(hostId, accommodationId, data)
+    .then(response => {
+      if (response) {
         return res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
-      }else{
+      } else {
         return res.status(404).json({ message: `The accommodation with id:${accommodationId} doesn't exist` })
 
       }
     })
-    .catch(error=>{
-      return res.status(400).json({message:error.message})
+    .catch(error => {
+      return res.status(400).json({ message: error.message })
 
     })
 }
@@ -143,6 +177,7 @@ module.exports = {
   getById,
   editAccomodation,
   remove,
+  post,
   getMyAccommodations,
   getMyAccommodation,
   deleteMyAccommodation,

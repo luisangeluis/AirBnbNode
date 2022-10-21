@@ -13,7 +13,8 @@ const accommodationsImages = require('../accommodationsImages/accommodationsImag
 require('../middleware/auth.middleware')(passport);
 
 router.route('/')
-  .get(accommodationsServices.getAll);
+  .get(accommodationsServices.getAll)
+  .post(passport.authenticate('jwt', { session: false }), roleHostMiddleware, accommodationsServices.post)
 
 router.route('/:id/make-reservation')
   .post(passport.authenticate('jwt', { session: false }), reservationsServices.postReservation);
