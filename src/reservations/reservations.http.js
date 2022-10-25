@@ -31,6 +31,21 @@ const postReservation = (req, res) => {
   const userId = req.user.id;
   const data = req.body;
 
+  if (!Object.keys(data).length) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
+
+  if(!data.arrival || !data.departure || !data.adults){
+    return res.status(400).json({
+      message: 'You must complete at least this fields',
+      fields:{
+        arrival:'Arrival date',
+        departure:'Departure date',
+        adults:'Type with number how many adults there are'
+      }
+    })
+  }
+  //TODO HACER VALIDACIONES ANTES DE ENVIAR RESERVA
   reservationsControllers.createReservation(userId, accommodationId, data)
     .then(response => {
       res.status(201).json(response)

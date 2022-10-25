@@ -5,7 +5,7 @@ const roleAdminMiddleware = (req, res, next) => {
   Role.findOne({ where: { name: "admin", } })
     .then((response) => { //? select * from roles where name = 'admin'
       const roleId = req.user.roleId;
-     
+
       if (roleId === response.id) {
         next();
       } else {
@@ -47,7 +47,33 @@ const roleHostMiddleware = (req, res, next) => {
     );
 }
 
+const roleGuestMiddleware = (req, res, next) => {
+  Role.findOne({
+    where: { name: 'guest' }
+  })
+    .then(response => {
+      const roleId = req.user.roleId;
+
+      if (roleId === response.id) {
+        next()
+      } else {
+        return res.status(401).json({
+          status: "error",
+          message: "User not authorized to make this request(must be guest)",
+        });
+      }
+    })
+    .catch(error => {
+      return res.status(401).json({
+        status: "error",
+        message: error.message,
+      });
+    })
+
+}
+
 module.exports = {
   roleAdminMiddleware,
-  roleHostMiddleware
+  roleHostMiddleware,
+  roleGuestMiddleware
 }

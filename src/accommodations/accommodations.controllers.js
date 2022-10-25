@@ -14,8 +14,19 @@ const getAllAccommodations = async () => {
       exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
     },
     include: [
-      { model: Users, as: 'user' },
-      { model: Places }
+      { 
+        model: Users,
+        as: 'user',
+        attributes:{
+          exclude:['gender','password','birthdayDate','dni','roleId','address','verified','createdAt','updatedAt']
+        }
+      },
+      { 
+        model: Places,
+        attributes:{
+          exclude:['createdAt','updatedAt']
+        }
+      }
     ]
   })
   return data;
@@ -38,7 +49,7 @@ const getAccommodationById = async (id) => {
         model: Users,
         as: 'user',
         attributes: {
-          exclude: ['createdAt', 'updatedAt']
+          exclude: ['createdAt', 'updatedAt','gender','password','birthdayDate','dni','roleId','address','verified']
         }
       }
     ]
@@ -77,7 +88,7 @@ const getAllMyAccommodations = async (userId) => {
   const response = await Accommodations.findAll({
     where: { hostId: userId },
     attributes: {
-      exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
+      exclude: ['createdAt', 'updatedAt', 'userId', 'placeId']
     },
     include: [
       {

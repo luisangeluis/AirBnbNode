@@ -64,6 +64,23 @@ const generateData = async () => {
     verified: false
   });
 
+  await Users.create({
+    id: "e1edcbf9-acdf-48d6-9ffa-995dd2b52eee",
+    firstName: "pedro",
+    lastName: "perez",
+    gender: "male",
+    email: "pedro@academlo.com",
+    password: "$2b$10$zrPhM0AoedA1RJg3C0fL7uWg8Qf/9aoCfwKknQKulg5Iz3tiJKIHK",
+    phone: "1234567890",
+    birthdayDate: "2000/10/20",
+    dni: "",
+    address: "",
+    roleId: "fef3a08d-2cec-4728-9745-7cbd2b37e557",
+    profileImage: "asd.com",
+    status: "active",
+    verified: false
+  });
+
   await Places.bulkCreate([
     {
       id: '864ee3c2-facd-4a23-8b4a-4e9d342d9036',

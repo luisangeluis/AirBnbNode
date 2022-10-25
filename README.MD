@@ -62,16 +62,14 @@
 ### Admin
 1. Ver los lugares
 2. Puede ver la informacion de un lugar.
-3. Reservar.
-<!-- TO DO Hacer score -->
-4. Dar un score una vez finalizada la reservación. 
-5. Puede ver perfiles de usuario.
-6. Editar el lugar.
-7. Puede eliminar el lugar.
-8. Modificar roles.
-9. Eliminar un usuario.
-10. Modificar un usuario.
-11. Ver los lugares de los host.
+3. Puede ver perfiles de usuario.
+<!-- me quede en el 4 -->
+4. Editar el lugar.
+5. Puede eliminar el lugar.
+6. Modificar roles.
+7. Eliminar un usuario.
+8. Modificar un usuario.
+9. Ver los lugares de los host.
 
 ### Accommodations
 
