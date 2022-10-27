@@ -4,10 +4,6 @@ const Accommodations = require('../models/accommodations.model');
 const Places = require('../models/places.model');
 const Users = require('../models/user.model')
 
-//
-//TO DO HACER RESERVATIONS
-//
-
 const getAllAccommodations = async () => {
   const data = await Accommodations.findAll({
     attributes: {

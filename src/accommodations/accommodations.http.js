@@ -62,7 +62,7 @@ const editAccomodation = (req, res) => {
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
   }
-
+  
   Accommodations.updateAccommodation(accommodationId, data)
     .then(response => {
       if (response) {

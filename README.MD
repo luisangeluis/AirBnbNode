@@ -63,9 +63,10 @@
 1. Ver los lugares
 2. Puede ver la informacion de un lugar.
 3. Puede ver perfiles de usuario.
-<!-- me quede en el 4 -->
 4. Editar el lugar.
+<!-- Elimina completamente el lugar -->
 5. Puede eliminar el lugar.
+<!-- Building the controllers of roles -->
 6. Modificar roles.
 7. Eliminar un usuario.
 8. Modificar un usuario.
