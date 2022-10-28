@@ -3,42 +3,42 @@ const uuid = require('uuid');
 const Roles = require('../models/roles.model');
 
 const ReadAllRoles = async () => {
-  const data = await Roles.findAll()
-  return data;
+  const response = await Roles.findAll()
+  return response;
 }
 
 const ReadRoleById = async (id) => {
-  const data = await Roles.findOne({
+  const response = await Roles.findOne({
     where: { id }
   })
 
-  return data;
+  return response;
 }
 
 const createRole = async (data) => {
-  const data = await Roles.create({
+  const response = await Roles.create({
     ...data,
     id: uuid.v4()
   })
 
-  return data;
+  return response;
 }
 
-const updateRole = async (id, data) => {
+const updateRole = async (roleId, data) => {
   const { id, ...restOfData } = data;
 
-  const data = await Roles.update(
+  const response = await Roles.update(
     restOfData,
-    { where: { id } }
+    { where: { id:roleId } }
   )
 
-  return data;
+  return response;
 }
 
 const deleteRole =async(id)=>{
-  const data = await Roles.destroy({where:{id}})
+  const response = await Roles.destroy({where:{id}})
 
-  return data;
+  return response;
 }
 
 module.exports={

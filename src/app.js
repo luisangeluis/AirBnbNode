@@ -10,6 +10,7 @@ const {upload} = require('./utils/testMulter')
 
 
 //Archivos de rutas
+const rolesRouter = require('./roles/roles.routes').router;
 const usersRouter = require('./users/users.routes').router;
 const authRouter = require('./auth/auth.routes').router;
 const accommodationsRouter =require('./accommodations/accommodations.routes').router;
@@ -21,6 +22,7 @@ const swaggerDoc = require('./swagger.json');
 
 //Configuraciones iniciales
 const { db } = require('./utils/database');
+const { application } = require('express');
 const PORT = process.env.PORT || 8000;
 const app = express();
 
@@ -51,10 +53,11 @@ if (process.env.NODE_ENV === 'production') {
 //para que el body de la peticion no salga undefined
 app.use(express.json());
 
-app.get('/', verbMiddleware, (req, res) => {
-  res.status(200).json({ message: 'status ok' })
-})
+// app.get('/', verbMiddleware, (req, res) => {
+//   res.status(200).json({ message: 'status ok' })
+// })
 
+app.use('/api/v1/roles',rolesRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/accommodations',accommodationsRouter);
@@ -72,11 +75,11 @@ app.get("/api/v1/uploadsimgsaccomm/:imgName", (req, res) => {
   res.status(200).sendFile(path.resolve('uploadsImgsAccommo/') + '/' + imgName)
 })
 
-app.get('/ejemplo',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.status(200).json({ message: 'Felicidades, tienes credenciales para entrar aqui', email: req.user.email });
-  })
+// app.get('/ejemplo',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     res.status(200).json({ message: 'Felicidades, tienes credenciales para entrar aqui', email: req.user.email });
+//   })
 
 app.post('/upload',upload.single('accommodationimg'),function(req,res){
   res.status(200).json({message:'hola'})
@@ -86,10 +89,6 @@ app.listen(PORT, () => {
   console.log(`server started at port:${PORT}`);
 });
 
-//FORMAS DE EXPORTAR
-// exports.default =app;
-// module.exports=app;
-// exports.app=app;
 module.exports = {
   app
 }

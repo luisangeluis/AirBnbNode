@@ -66,10 +66,10 @@ const editAccomodation = (req, res) => {
   Accommodations.updateAccommodation(accommodationId, data)
     .then(response => {
       if (response) {
-        res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
+        return res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
 
       } else {
-        res.status(404).json({ message: `The accommodation with id:${accommodationId} doesn't exist` })
+        return res.status(404).json({ message: `The accommodation with id:${accommodationId} doesn't exist` })
       }
     })
     .catch(error => {
@@ -91,7 +91,7 @@ const remove = (req, res) => {
       }
     })
     .catch(error => {
-      return res.status(400).json(error.message);
+      return res.status(400).json({message:error.message});
     })
 }
 
