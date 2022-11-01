@@ -118,6 +118,20 @@ const getHostReservationById = (req, res,) => {
     })
 }
 
+const cancelAsHost=(req,res)=>{
+  const hostId =  req.user.id;
+  const reservationId =req.params.reservationId;
+
+  reservationsControllers.cancelReservationAsHost(hostId,reservationId)
+    .then(response=>{
+      if(response)
+        res.status(200).json({message:`Reservation with id:${reservationId} successfully canceled.`})
+      else 
+        res.status(404).json({message:`Reservation with id${reservationId} doesn't exist.`})
+    })
+    .catch(error=>res.status(400).json({message:error.message}))
+}
+
 
 module.exports = {
   getAll,
@@ -126,5 +140,6 @@ module.exports = {
   getAllMyReservations,
   getHostReservations,
   getAllHostReservations,
-  getHostReservationById
+  getHostReservationById,
+  cancelAsHost
 }

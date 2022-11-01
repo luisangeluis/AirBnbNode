@@ -32,6 +32,9 @@ router.route('/my-accommodations/:id/post-image')
     roleHostMiddleware, uploadAccomm().single('accommodationimg'),
     accommodationsImages.sendImageMyAccommo)
 
+router.route('/host-accommodations')
+  .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware,accommodationsServices.getAccommodationsByHostId)
+
 router.route('/:id')
   .get(accommodationsServices.getById)
   .put(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, accommodationsServices.editAccomodation)

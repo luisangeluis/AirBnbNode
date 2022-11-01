@@ -168,7 +168,33 @@ const editMyAccommodation = (req, res) => {
     })
 }
 
+//Get all accommodations as Admin of any host
+const getAccommodationsByHostId =(req,res)=>{
+  const data = req.body;
+  const hostId =data.hostId
 
+  if (!Object.keys(data).length) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
+
+  if(!hostId){
+    return res.status(400).json({
+      message:'All fields must be completed',
+      fields:{
+        hostId:'Type an hostId',
+      }
+    })
+  }
+
+  Accommodations.getMyAccommodationById(hostId)
+    .then(response=>{
+      if(response)
+        return res.status(200).json({items:response.length,response})
+      else
+        return res.status(404).json({message:`User with id:${hostId} doesn't exist`})
+    })
+    .catch(error=>res.status(404).json({message:error.message}))
+}
 
 
 
@@ -181,5 +207,6 @@ module.exports = {
   getMyAccommodations,
   getMyAccommodation,
   deleteMyAccommodation,
-  editMyAccommodation
+  editMyAccommodation,
+  getAccommodationsByHostId
 }

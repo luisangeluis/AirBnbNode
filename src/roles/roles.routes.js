@@ -10,6 +10,8 @@ router.route('/')
   .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, rolesServices.getAll)
   .post(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, rolesServices.post)
 
+// router.route('/:id/')
+
 router.route('/:id')
   .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, rolesServices.getById)
   .put(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, rolesServices.edit)

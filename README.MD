@@ -50,10 +50,10 @@
 ### Host
 1. Ver los lugares
 2. Puede ver la informacion de un lugar.
-3. Reservar.
+3. Reservar.<!--Make tests-->
 4. Dar un score una vez finalizada la reservación.
 5. Crear lugares.
-6. Cancelar reservaciones donde es host.
+6. Cancelar reservaciones donde es host.<!--Make a test-->
 7. Puede ver perfiles de usuario.
 8. Puede ver todos los lugares que le pertenecen.
 9. Editar el lugar.
@@ -67,10 +67,10 @@
 <!-- Elimina completamente el lugar -->
 5. Puede eliminar el lugar.
 <!-- Building the controllers of roles -->
-6. Modificar roles.
-7. Eliminar un usuario.
-8. Modificar un usuario.
-9. Ver los lugares de los host.
+6. Modificar roles. <!--Make the tests--> 
+7. Eliminar un usuario.<!--Creo que ya-->
+8. Modificar un usuario. <!--Creo que ya-->
+9. Ver los lugares de los host.<!--Make the tests-->
 
 ### Accommodations
 

@@ -183,6 +183,30 @@ const getUserRole = (req, res) => {
       res.status(400).json({ message: error })
     })
 }
+
+const changeUserRole=(req,res)=>{
+  const userId =req.params.id;
+  const data = req.body;
+
+  if(!data.roleId){
+    return res.status(400).json({
+      message:`You must add an userRole`,
+      field:{
+        roleId:'Type an userRoler'
+      }
+    })
+  }
+
+  userControllers.updateUserRole(userId,data)
+    .then(response=>{
+      if(response)
+        return res.status(200).json({message:`User with id:${userId} has changed his role`})
+      else
+        return res.status(404).json({message:`User with id:${userId} doesn't exist`})
+    })
+    .catch(error=>res.status(400).json({message:error.message}))
+}
+
 module.exports = {
   getAll,
   getById,
@@ -193,5 +217,6 @@ module.exports = {
   getMyUser,
   removeMyUser,
   postProfileImg,
-  getUserRole
+  getUserRole,
+  changeUserRole
 };

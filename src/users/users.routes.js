@@ -19,14 +19,18 @@ router.route('/me')
 
 // router.route('/me/profile-img')
 //   .post(passport.authenticate('jwt', { session: false }),usersMulter().single('profile_img'),usersServices.postProfileImg)
-  // .get(passport.authenticate('jwt', { session: false }),);
+// .get(passport.authenticate('jwt', { session: false }),);
+
+router.route('/:id/role')
+  .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware,usersServices.getUserRole)
+  .patch(passport.authenticate('jwt', { session: false }), roleAdminMiddleware,usersServices.changeUserRole)
+// router.route('/:id/')
 
 router.route('/:id')
   .get(usersServices.getById)
   .delete(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, usersServices.remove)
-  .put(passport.authenticate('jwt', { session: false }),usersServices.edit);
+  .put(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, usersServices.edit);
 
-router.route('/:id/role')
-  .get(usersServices.getUserRole);
+
 
 exports.router = router;

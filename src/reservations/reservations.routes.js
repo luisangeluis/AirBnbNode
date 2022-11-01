@@ -18,14 +18,14 @@ router.route('/my-reservations/:id')
 router.route('/my-reservations_as-host')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, reservationsServices.getAllHostReservations)
 
+router.route('/my-reservations_as-host/:reservationId/cancel')
+  .patch(passport.authenticate('jwt', { session: false }), roleHostMiddleware, reservationsServices.cancelAsHost)
+
 router.route('/my-reservations_as-host/:reservationId')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, reservationsServices.getHostReservationById)
 
 router.route('/:reservationId')
   .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, reservationsServices.getById)
-
-
-
 
 module.exports = {
   router

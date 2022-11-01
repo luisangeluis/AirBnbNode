@@ -99,6 +99,19 @@ const getMyHostReservationById = async (hostId, reservationId) => {
   return response;
 }
 
+const cancelReservationAsHost = async (hostId, reservationId) => {
+  const response = await Reservations.update(
+    {
+      where: { id: reservationId },
+      include: {
+        model: Accommodations,
+        where: { hostId }
+      }
+
+    }
+  )
+}
+
 module.exports = {
   getAllReservations,
   getReservationById,
@@ -107,5 +120,6 @@ module.exports = {
   updateReservation,
   getMyReservationByUserId,
   getAllMyHostReservartions,
-  getMyHostReservationById
+  getMyHostReservationById,
+  cancelReservationAsHost
 }

@@ -10,7 +10,7 @@ const getAllUsers = async () => {
       exclude: ['password']
     }
   });
-  
+
 
   return data;
 }
@@ -78,11 +78,11 @@ const deleteUser = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-  const response =await Users.findOne({
-     where: { email },
-     attributes:{
-      exclude:['createdAt','updatedAt']
-     }
+  const response = await Users.findOne({
+    where: { email },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
+    }
   });
   return response;
 }
@@ -119,6 +119,18 @@ const getUserWithRole = async (userId) => {
   return data;
 }
 
+const updateUserRole = async (userId, data) => {
+  const roleId = data.roleId;
+
+  const response = await Users.update(
+    { roleId },
+    { where: { id: userId } }
+  );
+
+  return response;
+}
+
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -127,5 +139,6 @@ module.exports = {
   deleteUser,
   getUserByEmail,
   editProfileImg,
-  getUserWithRole
+  getUserWithRole,
+  updateUserRole
 }
