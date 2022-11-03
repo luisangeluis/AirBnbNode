@@ -8,10 +8,12 @@ const getAllReservations = async () => {
   const data = await Reservations.findAll({
     include: [
       {
-        model: Users
+        model: Users,
+        exclude: ['password', 'createdAt', 'updatedAt']
       },
       {
-        model: Accommodations
+        model: Accommodations,
+        as: 'accommodation'
       }
     ]
   })
@@ -112,6 +114,29 @@ const cancelReservationAsHost = async (hostId, reservationId) => {
   )
 }
 
+//Update score later the reservation has finished.
+const updateAScore = async (reservationId, userId, score) => {
+  const scor = { score }
+  // const response = await Reservations.findOne(
+  //   { id: reservationId }
+  // )
+  const response = await Reservations.update(
+    scor,
+    {
+      where: {
+        userId,
+        id:reservationId,
+        // isFinished: true
+      }
+    }
+  )
+  console.log('response ',response);
+  return response;
+}
+
+
+
+
 module.exports = {
   getAllReservations,
   getReservationById,
@@ -121,5 +146,6 @@ module.exports = {
   getMyReservationByUserId,
   getAllMyHostReservartions,
   getMyHostReservationById,
-  cancelReservationAsHost
+  cancelReservationAsHost,
+  updateAScore
 }

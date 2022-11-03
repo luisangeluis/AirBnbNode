@@ -38,22 +38,22 @@
 [✔]Logguear mi usuario.
 
 ### Usuario sin sesión iniciada
-1. Ver los lugares.
-2. Puede ver la informacion de un lugar.
+1. Ver los lugares.<!--Ready-->
+2. Puede ver la informacion de un lugar.<!--Ready-->
 
 ### Guest
-1. Ver los lugares
-2. Puede ver la informacion de un lugar.
-3. Reservar.
+1. Ver los lugares<!--Ready-->
+2. Puede ver la informacion de un lugar.<!--Ready-->
+3. Reservar.<!--Ready-->
 4. Dar un score una vez finalizada la reservación.
 
 ### Host
 1. Ver los lugares
 2. Puede ver la informacion de un lugar.
-3. Reservar.<!--Make tests-->
+3. Reservar.
 4. Dar un score una vez finalizada la reservación.
 5. Crear lugares.
-6. Cancelar reservaciones donde es host.<!--Make a test-->
+6. Cancelar reservaciones donde es host.
 7. Puede ver perfiles de usuario.
 8. Puede ver todos los lugares que le pertenecen.
 9. Editar el lugar.
@@ -67,10 +67,10 @@
 <!-- Elimina completamente el lugar -->
 5. Puede eliminar el lugar.
 <!-- Building the controllers of roles -->
-6. Modificar roles. <!--Make the tests--> 
-7. Eliminar un usuario.<!--Creo que ya-->
-8. Modificar un usuario. <!--Creo que ya-->
-9. Ver los lugares de los host.<!--Make the tests-->
+6. Modificar roles.  
+7. Eliminar un usuario.
+8. Modificar un usuario. 
+9. Ver los lugares de los host.
 
 ### Accommodations
 

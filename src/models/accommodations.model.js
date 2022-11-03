@@ -27,10 +27,10 @@ const Accommodations = db.define('accommodations', {
     allowNull: false,
     type:DataTypes.FLOAT
   },
-  hostId:{
+  userId:{
     allowNull: false,
     type:DataTypes.UUID,  
-    field: 'userId'
+    field: 'user_id'
     
   },
   score:{

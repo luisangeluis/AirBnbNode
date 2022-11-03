@@ -13,7 +13,11 @@ router.route('/my-reservations')
   .get(passport.authenticate('jwt', { session: false }), reservationsServices.getAllMyReservations)
 
 router.route('/my-reservations/:id')
-  .get(passport.authenticate('jwt', { session: false }),)
+  .get(passport.authenticate('jwt', { session: false }),reservationsServices.getById)
+
+//Guest give a score with finished reservation.
+router.route('/my-reservations/:id/score')
+  .patch(passport.authenticate('jwt', { session: false }),reservationsServices.giveAScore)
 
 router.route('/my-reservations_as-host')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, reservationsServices.getAllHostReservations)

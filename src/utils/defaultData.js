@@ -135,7 +135,7 @@ const generateData = async () => {
     beds: 3,
     bathrooms: 4.5,
     price: 1536.00,
-    hostId: '3bd244ca-7a80-4f1f-9732-019871f53a54',
+    userId: '3bd244ca-7a80-4f1f-9732-019871f53a54',
     score: 0.00,
     placeId: '9c0412b6-7d56-4347-8fbe-5455e8a42438',
     commision: 150.00
@@ -150,7 +150,7 @@ const generateData = async () => {
     beds: 3,
     bathrooms: 4.5,
     price: 1536.00,
-    hostId: '74cd6011-7e76-4d6d-b25b-1d6e4182ec2f',
+    userId: '74cd6011-7e76-4d6d-b25b-1d6e4182ec2f',
     score: 0.00,
     placeId: '9c0412b6-7d56-4347-8fbe-5455e8a42438',
     commision: 150.00
@@ -158,42 +158,25 @@ const generateData = async () => {
 
   await Reservations.create({
     id:"0ef06465-3035-402f-b77b-d7f5d2a67fbe",
-    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+    userId:"e1edcbf9-acdf-48d6-9ffa-995dd2b52eee",
     arrival:"2020/10/10",
     departure:"2020/10/10",
     accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
-    adults:2
-  })
-
-  await Reservations.create({
-    id:"bf0e8e8c-6af8-44dd-b1ab-b365a713bb2b",
-    userId:"3bd244ca-7a80-4f1f-9732-019871f53a54",
-    arrival:"2020/10/10",
-    departure:"2020/10/10",
-    accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
-    adults:2
-  })
-
-  await Reservations.create({
-    id:"175859ed-9a4b-4dfa-8c10-714346d18531",
-    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
-    arrival:"2020/10/10",
-    departure:"2020/10/10",
-    accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
-    adults:2
-  })
-
-  await Reservations.create({
-    id:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
-    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
-    arrival:"2020/10/10",
-    departure:"2020/10/10",
-    accommodationId:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
-    adults:2
+    adults:2,
+    isFinished:true
   })
 
   // await Reservations.create({
-  //   id:"e0950302-8b09-4899-95a3-109c91e19454",
+  //   id:"bf0e8e8c-6af8-44dd-b1ab-b365a713bb2b",
+  //   userId:"3bd244ca-7a80-4f1f-9732-019871f53a54",
+  //   arrival:"2020/10/10",
+  //   departure:"2020/10/10",
+  //   accommodationId:"7e5fc196-8f45-46d2-bb2b-2f8b95340d50",
+  //   adults:2
+  // })
+
+  // await Reservations.create({
+  //   id:"175859ed-9a4b-4dfa-8c10-714346d18531",
   //   userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
   //   arrival:"2020/10/10",
   //   departure:"2020/10/10",
@@ -201,8 +184,14 @@ const generateData = async () => {
   //   adults:2
   // })
 
-
-  
+  // await Reservations.create({
+  //   id:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+  //   userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+  //   arrival:"2020/10/10",
+  //   departure:"2020/10/10",
+  //   accommodationId:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+  //   adults:2
+  // })
 }
 
 

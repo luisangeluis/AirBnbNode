@@ -10,17 +10,17 @@ const getAllAccommodations = async () => {
       exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
     },
     include: [
-      { 
+      {
         model: Users,
         as: 'user',
-        attributes:{
-          exclude:['gender','password','birthdayDate','dni','roleId','address','verified','createdAt','updatedAt']
+        attributes: {
+          exclude: ['gender', 'password', 'birthdayDate', 'dni', 'roleId', 'address', 'status', 'verified', 'createdAt', 'updatedAt']
         }
       },
-      { 
+      {
         model: Places,
-        attributes:{
-          exclude:['createdAt','updatedAt']
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
         }
       }
     ]
@@ -45,7 +45,7 @@ const getAccommodationById = async (id) => {
         model: Users,
         as: 'user',
         attributes: {
-          exclude: ['createdAt', 'updatedAt','gender','password','birthdayDate','dni','roleId','address','verified']
+          exclude: ['createdAt', 'updatedAt', 'gender', 'password', 'birthdayDate', 'dni', 'roleId', 'address', 'status','verified']
         }
       }
     ]
@@ -54,7 +54,7 @@ const getAccommodationById = async (id) => {
 }
 
 
-const createAccommodation = async (hostId , data) => {
+const createAccommodation = async (hostId, data) => {
   const newAccommodation = await Accommodations.create({
     ...data,
     id: uuid.v4(),
@@ -127,7 +127,7 @@ const editMyAccommodationById = async (userId, accommodationId, data) => {
     {
       where: {
         hostId: userId,
-        id:accommodationId
+        id: accommodationId
       }
     }
   )
@@ -135,7 +135,7 @@ const editMyAccommodationById = async (userId, accommodationId, data) => {
   return response;
 }
 
- 
+
 
 module.exports = {
   getAllAccommodations,

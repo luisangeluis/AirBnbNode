@@ -15,31 +15,15 @@ module.exports = (passport) => {
         const response = await getUserById(decoded.id);
 
         console.log('hola');
-        if (!response) {return done(null, false);}
+        if (!response) {
+          return done(null, false);
+        }
 
         return done(null, decoded);
-
       } catch (error) {
-
         return done(error.message);
 
       }
-
-
-      //*************************** */
-      //TO DO Esta diferente en el repo
-      //*************************** */
-      // Users.findOne({ where: { id: decoded.id } }, (error, user) => {
-      //   if (error) {
-      //     return done(error, false);
-      //   }
-      //   if (user) {
-      //     return done(null, decoded);
-      //   } else {
-      //     return done(null, false);
-      //   }
-      // })
-
     })
   );
 };
