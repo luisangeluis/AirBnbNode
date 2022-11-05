@@ -23,6 +23,12 @@ const Places = db.define('places',{
     type:DataTypes.STRING,
     allowNull: false,
   },
+  isActive:{
+    type:DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:true,
+    field:'is_active'
+  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,

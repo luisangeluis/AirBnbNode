@@ -11,7 +11,7 @@ const getAll = (req, res) => {
 }
 
 const getById = (req, res) => {
-  const reservationId = req.params.reservationId;
+  const reservationId = req.params.id;
 
   reservationsControllers.getReservationById(reservationId)
     .then(response => {
