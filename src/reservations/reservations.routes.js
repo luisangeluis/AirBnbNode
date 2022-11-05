@@ -2,7 +2,9 @@ const router = require('express').Router();
 const reservationsServices = require('./reservations.http');
 //Pasport
 const passport = require('passport');
+//Middlewares
 const { roleAdminMiddleware, roleHostMiddleware } = require('../middleware/adminRole.middleware');
+const {reservationExistMiddleware} =require('../middleware/reservationExist.middleware');
 
 require('../middleware/auth.middleware')(passport);
 

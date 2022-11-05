@@ -126,7 +126,7 @@ const updateAScore = async (reservationId, userId, score) => {
       where: {
         userId,
         id:reservationId,
-        // isFinished: true
+        isFinished: true
       }
     }
   )
