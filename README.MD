@@ -45,7 +45,7 @@
 1. Ver los lugares<!--Ready-->
 2. Puede ver la informacion de un lugar.<!--Ready-->
 3. Reservar.<!--Ready-->
-4. Dar un score una vez finalizada la reservación.
+4. Dar un score una vez finalizada la reservación. <!--Hacer una ultima prueba y avanzar>
 
 ### Host
 1. Ver los lugares

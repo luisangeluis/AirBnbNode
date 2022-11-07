@@ -138,9 +138,8 @@ const cancelAsHost = (req, res) => {
 //Guest give a score with finished reservation.
 const giveAScore = (req, res) => {
   const reservationId = req.params.id;
-  const userId = req.user.id;
   const score = req.body.score;
-  
+
   //TODO Set the score range
   if (!score) {
     return res.status(400).json({
@@ -151,13 +150,13 @@ const giveAScore = (req, res) => {
     })
   }
 
-  reservationsControllers.updateAScore(reservationId, userId,score)
+  reservationsControllers.updateAScore(reservationId, score)
     .then(response => {
       console.log(response);
-      // if (response)
+      if (response[0])
         return res.status(200).json({ message: `Reservation score with id:${reservationId} edited successfully.` })
-      // else
-      //   return res.status(404).json({ message: `Reservation wit id:${reservationId} doesn't exist.` })
+      else
+        return res.status(400).json({ message: `Reservation wit id:${reservationId} must be finished to give a score` })
     })
     .catch(error => res.status(400).json({ message: error.message }))
 

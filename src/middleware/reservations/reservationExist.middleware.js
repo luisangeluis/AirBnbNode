@@ -1,4 +1,4 @@
-const Reservation = require('../models/reservations.model');
+const Reservation = require('../../models/reservations.model');
 
 const reservationExistMiddleware=(req,res,next)=>{
   const userId = req.user.id;

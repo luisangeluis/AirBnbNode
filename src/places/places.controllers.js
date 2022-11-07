@@ -25,7 +25,7 @@ const createPlace = async (data) => {
 }
 
 const updatePlace = async (placeId, data) => {
-  const { id,isActive, ...restOfData } = data;
+  const { id, isActive, ...restOfData } = data;
 
   const response = await Places.update(
     { ...restOfData },
@@ -35,8 +35,14 @@ const updatePlace = async (placeId, data) => {
   return response;
 }
 
+const deletePlace = async (id) => {
+  const response = await Places.destroy({ where: { id } })
+
+  return response;
+}
+
 //change the status of the place.
-const updateIsActive = async(placeId) => {
+const updateIsActive = async (placeId) => {
   const response = await Places.update(
     { isActive: !isActive },
     { where: { id: placeId } }
@@ -45,11 +51,13 @@ const updateIsActive = async(placeId) => {
   return response;
 }
 
-modulo.exports={
+
+module.exports = {
   readAllPlaces,
   readPlaceById,
   createPlace,
   updatePlace,
+  deletePlace,
   updateIsActive
 }
 

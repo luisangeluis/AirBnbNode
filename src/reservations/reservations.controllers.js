@@ -44,11 +44,11 @@ const createReservation = async (userId, accommodationId, data) => {
 
 const updateReservation = async (reservationId, data) => {
 
-  const { id, userId, accommodationId, isFinished, isCanceled, restOfData } = data;
+  const { id, userId, accommodationId, isFinished, isCanceled, score, ...restOfData } = data;
 
   const response = await Reservations.update(
     { where: { id: reservationId } },
-    restOfData
+    ...restOfData
   )
 
   return response;
@@ -115,7 +115,7 @@ const cancelReservationAsHost = async (hostId, reservationId) => {
 }
 
 //Update score later the reservation has finished.
-const updateAScore = async (reservationId, userId, score) => {
+const updateAScore = async (reservationId, score) => {
   const scor = { score }
   // const response = await Reservations.findOne(
   //   { id: reservationId }
@@ -124,13 +124,12 @@ const updateAScore = async (reservationId, userId, score) => {
     scor,
     {
       where: {
-        userId,
-        id:reservationId,
+        id: reservationId,
         isFinished: true
       }
     }
   )
-  console.log('response ',response);
+  console.log('response ', response);
   return response;
 }
 

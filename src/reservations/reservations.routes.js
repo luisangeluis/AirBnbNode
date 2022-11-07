@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const reservationsServices = require('./reservations.http');
-//Pasport
 const passport = require('passport');
 //Middlewares
 const { roleAdminMiddleware, roleHostMiddleware } = require('../middleware/adminRole.middleware');
-const {reservationExistMiddleware} =require('../middleware/reservationExist.middleware');
+const { reservationExistMiddleware } = require('../middleware/reservations/reservationExist.middleware');
+//Services
+const reservationsServices = require('./reservations.http');
 
 require('../middleware/auth.middleware')(passport);
 
@@ -15,11 +15,11 @@ router.route('/my-reservations')
   .get(passport.authenticate('jwt', { session: false }), reservationsServices.getAllMyReservations)
 
 router.route('/my-reservations/:id')
-  .get(passport.authenticate('jwt', { session: false }),reservationsServices.getById)
+  .get(passport.authenticate('jwt', { session: false }), reservationsServices.getById)
 
 //Guest give a score with finished reservation.
 router.route('/my-reservations/:id/score')
-  .patch(passport.authenticate('jwt', { session: false }),reservationsServices.giveAScore)
+  .patch(passport.authenticate('jwt', { session: false }), reservationExistMiddleware, reservationsServices.giveAScore)
 
 router.route('/my-reservations_as-host')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, reservationsServices.getAllHostReservations)
