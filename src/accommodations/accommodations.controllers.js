@@ -54,11 +54,11 @@ const getAccommodationById = async (id) => {
 }
 
 
-const createAccommodation = async (hostId, data) => {
+const createAccommodation = async (userId, data) => {
   const newAccommodation = await Accommodations.create({
     ...data,
     id: uuid.v4(),
-    hostId: hostId,
+    userId,
     score: 0.00,
   })
 
@@ -82,7 +82,7 @@ const deleteAccommodation = async (accommodationId) => {
 
 const getAllMyAccommodations = async (userId) => {
   const response = await Accommodations.findAll({
-    where: { hostId: userId },
+    where: { userId },
     attributes: {
       exclude: ['createdAt', 'updatedAt', 'userId', 'placeId']
     },

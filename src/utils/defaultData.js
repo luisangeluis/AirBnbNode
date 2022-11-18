@@ -184,14 +184,14 @@ const generateData = async () => {
   //   adults:2
   // })
 
-  // await Reservations.create({
-  //   id:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
-  //   userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
-  //   arrival:"2020/10/10",
-  //   departure:"2020/10/10",
-  //   accommodationId:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
-  //   adults:2
-  // })
+  await Reservations.create({
+    id:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+    userId:"74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+    arrival:"2020/10/10",
+    departure:"2020/10/10",
+    accommodationId:"b784d7f8-10a2-4542-bb4e-d2c88f2db3b3",
+    adults:2
+  })
 }
 
 

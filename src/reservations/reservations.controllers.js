@@ -73,13 +73,13 @@ const getMyReservationByUserId = async (userId, reservationId) => {
   return data;
 }
 
-const getAllMyHostReservartions = async (hostId) => {
+const getAllMyHostReservartions = async (userId) => {
   const response = await Reservations.findAll({
     // where: { accommodationId: accommodationId },
     include:
     {
       model: Accommodations,
-      where: { hostId }
+      where: { userId }
     }
 
   })
@@ -103,15 +103,11 @@ const getMyHostReservationById = async (hostId, reservationId) => {
 
 const cancelReservationAsHost = async (hostId, reservationId) => {
   const response = await Reservations.update(
-    {
-      where: { id: reservationId },
-      include: {
-        model: Accommodations,
-        where: { hostId }
-      }
-
-    }
+    { isCanceled: true },
+    { where: { id: reservationId } }
   )
+
+  return response;
 }
 
 //Update score later the reservation has finished.

@@ -45,19 +45,19 @@
 1. Ver los lugares<!--Ready-->
 2. Puede ver la informacion de un lugar.<!--Ready-->
 3. Reservar.<!--Ready-->
-4. Dar un score una vez finalizada la reservación. <!--Hacer una ultima prueba y avanzar>
+4. Dar un score una vez finalizada la reservación. <!--Ready-->
 
 ### Host
-1. Ver los lugares
-2. Puede ver la informacion de un lugar.
-3. Reservar.
-4. Dar un score una vez finalizada la reservación.
-5. Crear lugares.
-6. Cancelar reservaciones donde es host.
-7. Puede ver perfiles de usuario.
-8. Puede ver todos los lugares que le pertenecen.
-9. Editar el lugar.
-10. Puede eliminar el lugar.
+1. Ver los lugares<!--Ready-->
+2. Puede ver la informacion de un lugar.<!--Ready-->
+3. Crear lugares.<!--Ready--> 
+<!-- Asegurarse que la reservation pertenece al host logueado, talvez con un middleware -->
+<!-- O talvez con un update con inner join -->
+4. Cancelar reservaciones donde es host.<!---->
+5. Puede ver perfiles de usuario.
+6. Puede ver todos los lugares que le pertenecen.
+7. Editar el lugar.
+8. Puede eliminar el lugar.
 
 ### Admin
 1. Ver los lugares

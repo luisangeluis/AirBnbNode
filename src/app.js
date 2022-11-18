@@ -54,10 +54,6 @@ if (process.env.NODE_ENV === 'production') {
 //para que el body de la peticion no salga undefined
 app.use(express.json());
 
-// app.get('/', verbMiddleware, (req, res) => {
-//   res.status(200).json({ message: 'status ok' })
-// })
-
 app.use('/api/v1/roles',rolesRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
@@ -76,12 +72,6 @@ app.get("/api/v1/uploadsimgsaccomm/:imgName", (req, res) => {
   const imgName = req.params.imgName;
   res.status(200).sendFile(path.resolve('uploadsImgsAccommo/') + '/' + imgName)
 })
-
-// app.get('/ejemplo',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     res.status(200).json({ message: 'Felicidades, tienes credenciales para entrar aqui', email: req.user.email });
-//   })
 
 app.post('/upload',upload.single('accommodationimg'),function(req,res){
   res.status(200).json({message:'hola'})
