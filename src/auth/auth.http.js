@@ -22,8 +22,6 @@ const login = (req, res) => {
       } else {
         return res.status(401).json({ message: "Invalid Credentials" });
       }
-
-
     })
     .catch(error => {
       return res.status(401).json({ message: 'Invalid credentials' });

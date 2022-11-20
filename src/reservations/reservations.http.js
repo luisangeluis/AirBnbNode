@@ -124,7 +124,7 @@ const getHostReservationById = (req, res,) => {
 const cancelAsHost = (req, res) => {
   const hostId = req.user.id;
   const reservationId = req.params.reservationId;
-
+  const cancel = { isCanceled: true }
   reservationsControllers.cancelReservationAsHost(hostId, reservationId)
     .then(response => {
       if (response)

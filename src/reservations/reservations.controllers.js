@@ -93,7 +93,7 @@ const getMyHostReservationById = async (hostId, reservationId) => {
     include:
     {
       model: Accommodations,
-      where: { hostId }
+      where: { userId:hostId }
     }
 
   })

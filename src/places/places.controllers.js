@@ -51,7 +51,6 @@ const updateIsActive = async (placeId) => {
   return response;
 }
 
-
 module.exports = {
   readAllPlaces,
   readPlaceById,

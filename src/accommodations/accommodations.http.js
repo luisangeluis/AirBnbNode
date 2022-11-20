@@ -23,7 +23,7 @@ const getById = (req, res) => {
 
 const post = (req, res) => {
   const data = req.body;
-  const userId =req.user.id;
+  const userId = req.user.id;
 
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
@@ -31,21 +31,21 @@ const post = (req, res) => {
 
   if (!data.title || !data.description || !data.guests || !data.bathrooms || !data.price || !data.placeId ||
     !data.commision) {
-      return res.status(400).json({
-        message:'All fields must be completed',
-        fields:{
-          title:'Type a string',
-          description:'Type a string',
-          guests:'Type a num',
-          bathrooms:'Type a num',
-          price:'Type a price',
-          placeId: 'Type an id',
-          commision: 'Type a commision'
-        }
-      })
+    return res.status(400).json({
+      message: 'All fields must be completed',
+      fields: {
+        title: 'Type a string',
+        description: 'Type a string',
+        guests: 'Type a num',
+        bathrooms: 'Type a num',
+        price: 'Type a price',
+        placeId: 'Type an id',
+        commision: 'Type a commision'
+      }
+    })
   }
 
-  Accommodations.createAccommodation(userId,data)
+  Accommodations.createAccommodation(userId, data)
     .then(response => {
       return res.status(201).json({
         message: `Accommodation created successfully`,
@@ -62,7 +62,7 @@ const editAccomodation = (req, res) => {
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
   }
-  
+
   Accommodations.updateAccommodation(accommodationId, data)
     .then(response => {
       if (response) {
@@ -91,7 +91,7 @@ const remove = (req, res) => {
       }
     })
     .catch(error => {
-      return res.status(400).json({message:error.message});
+      return res.status(400).json({ message: error.message });
     })
 }
 
@@ -100,6 +100,7 @@ const getMyAccommodations = (req, res) => {
 
   Accommodations.getAllMyAccommodations(userId)
     .then(response => {
+
       if (response) {
         return res.status(200).json({ items: response.length, response })
       } else {
@@ -118,13 +119,14 @@ const getMyAccommodation = (req, res) => {
   Accommodations.getMyAccommodationById(hostId, accommodationId)
     .then(response => {
       if (response) {
-        res.status(200).json(response)
+        return res.status(200).json(response)
       } else {
-        return res.status(404).json({ message: `The Accommodation with id:${id} doesn't exist` });
+        return res.status(404).json({ message: `The Accommodation with id:${accommodationId} doesn't exist` });
       }
     })
     .catch(error => {
-      return res.status(400).json(error.message);
+      console.log({ error });
+      return res.status(400).json({ message: error.message });
     })
 }
 
@@ -149,13 +151,15 @@ const editMyAccommodation = (req, res) => {
   const accommodationId = req.params.id;
   const data = req.body;
 
-  if (!Object.keys(data).length) {
-    return res.status(400).json({ message: 'Missing data' });
-  }
+  const { id, userId, score, placeId, ...restOfData } = data;
 
-  Accommodations.editMyAccommodationById(hostId, accommodationId, data)
+  if (!Object.keys(restOfData).length)
+    return res.status(400).json({ message: 'Missing data' });
+
+  Accommodations.editMyAccommodationById(hostId, accommodationId, restOfData)
     .then(response => {
-      if (response) {
+      console.log({ response });
+      if (response[0]) {
         return res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
       } else {
         return res.status(404).json({ message: `The accommodation with id:${accommodationId} doesn't exist` })
@@ -169,31 +173,31 @@ const editMyAccommodation = (req, res) => {
 }
 
 //Get all accommodations as Admin of any host
-const getAccommodationsByHostId =(req,res)=>{
+const getAccommodationsByHostId = (req, res) => {
   const data = req.body;
-  const hostId =data.hostId
+  const hostId = data.hostId
 
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
   }
 
-  if(!hostId){
+  if (!hostId) {
     return res.status(400).json({
-      message:'All fields must be completed',
-      fields:{
-        hostId:'Type an hostId',
+      message: 'All fields must be completed',
+      fields: {
+        hostId: 'Type an hostId',
       }
     })
   }
 
   Accommodations.getMyAccommodationById(hostId)
-    .then(response=>{
-      if(response)
-        return res.status(200).json({items:response.length,response})
+    .then(response => {
+      if (response)
+        return res.status(200).json({ items: response.length, response })
       else
-        return res.status(404).json({message:`User with id:${hostId} doesn't exist`})
+        return res.status(404).json({ message: `User with id:${hostId} doesn't exist` })
     })
-    .catch(error=>res.status(404).json({message:error.message}))
+    .catch(error => res.status(404).json({ message: error.message }))
 }
 
 

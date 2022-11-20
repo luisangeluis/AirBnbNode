@@ -51,18 +51,16 @@
 1. Ver los lugares<!--Ready-->
 2. Puede ver la informacion de un lugar.<!--Ready-->
 3. Crear lugares.<!--Ready--> 
-<!-- Asegurarse que la reservation pertenece al host logueado, talvez con un middleware -->
-<!-- O talvez con un update con inner join -->
-4. Cancelar reservaciones donde es host.<!---->
-5. Puede ver perfiles de usuario.
-6. Puede ver todos los lugares que le pertenecen.
-7. Editar el lugar.
+4. Cancelar reservaciones donde es host.<!--Ready-->
+5. Puede ver perfiles de usuario.<!--Ready-->
+6. Puede ver todos los lugares que le pertenecen.<!--Ready-->
+7. Editar el lugar.<!--Ready-->
 8. Puede eliminar el lugar.
 
 ### Admin
-1. Ver los lugares
-2. Puede ver la informacion de un lugar.
-3. Puede ver perfiles de usuario.
+1. Ver los lugares<!--Ready-->
+2. Puede ver la informacion de un lugar.<!--Ready-->
+3. Puede ver perfiles de usuario.<!--Ready-->
 4. Editar el lugar.
 <!-- Elimina completamente el lugar -->
 5. Puede eliminar el lugar.

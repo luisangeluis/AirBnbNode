@@ -100,9 +100,10 @@ const getAllMyAccommodations = async (userId) => {
 }
 
 const getMyAccommodationById = async (hostId, accommodationId) => {
+  console.log({userId:hostId,accommodationId});
   const response = Accommodations.findOne({
     where: {
-      hostId: hostId,
+      userId: hostId,
       id: accommodationId
     }
   })
@@ -126,7 +127,7 @@ const editMyAccommodationById = async (userId, accommodationId, data) => {
     restOfData,
     {
       where: {
-        hostId: userId,
+        userId: userId,
         id: accommodationId
       }
     }
@@ -146,6 +147,6 @@ module.exports = {
   getAllMyAccommodations,
   getMyAccommodationById,
   deleteMyAccommodationById,
-  // editMyAccommodationById
+  editMyAccommodationById
 }
 
