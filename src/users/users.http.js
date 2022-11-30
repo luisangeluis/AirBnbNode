@@ -80,28 +80,34 @@ const remove = (req, res) => {
         return res.status(204).json();
       }
       else {
-        return res.status(400).json({ message: 'Invalid Id' });
+        return res.status(404).json({ message: 'Invalid Id' });
       }
     })
+    .catch(error => res.status(400).json({ message: error.message }))
 };
 
 const edit = (req, res) => {
-  const id = req.params.id;
+  const userId = req.params.id;
   const data = req.body;
   const userRole = req.user.roleId;
 
-  if (!Object.keys(data).length) {
-    return res.status(400).json({ message: 'Missing data' });
-  } else {
-    userControllers.editUser(id, data, userRole)
-      .then(response => {
-        res.status(200).json({ message: `User with id:${id} edited succesfully` });
-      })
-      .catch(error => {
-        res.status(400).json(error)
-      })
+  const { id, email, password, phone, dni, address, profileImage, verified, ...restOfData } = data;
 
+  if (!Object.keys(restOfData).length) {
+    return res.status(400).json({ message: 'Missing data' });
   }
+  userControllers.editUser(userId, restOfData, userRole)
+    .then(response => {
+      if (response[0])
+        return res.status(200).json({ message: `User with id:${userId} edited succesfully` });
+      else
+        return res.status(404).json({ message: `User with id:${userId} doesn't exist` });
+    })
+    .catch(error => {
+      res.status(400).json(error.message);
+    })
+
+
 };
 
 const editMyUser = (req, res) => {
@@ -184,27 +190,27 @@ const getUserRole = (req, res) => {
     })
 }
 
-const changeUserRole=(req,res)=>{
-  const userId =req.params.id;
+const changeUserRole = (req, res) => {
+  const userId = req.params.id;
   const data = req.body;
 
-  if(!data.roleId){
+  if (!data.roleId) {
     return res.status(400).json({
-      message:`You must add an userRole`,
-      field:{
-        roleId:'Type an userRoler'
+      message: `You must add an userRole`,
+      field: {
+        roleId: 'Type an userRoler'
       }
     })
   }
 
-  userControllers.updateUserRole(userId,data)
-    .then(response=>{
-      if(response)
-        return res.status(200).json({message:`User with id:${userId} has changed his role`})
+  userControllers.updateUserRole(userId, data)
+    .then(response => {
+      if (response)
+        return res.status(200).json({ message: `User with id:${userId} has changed his role` })
       else
-        return res.status(404).json({message:`User with id:${userId} doesn't exist`})
+        return res.status(404).json({ message: `User with id:${userId} doesn't exist` })
     })
-    .catch(error=>res.status(400).json({message:error.message}))
+    .catch(error => res.status(400).json({ message: error.message }))
 }
 
 module.exports = {

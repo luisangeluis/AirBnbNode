@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const { roleAdminMiddleware, roleHostMiddleware,roleGuestMiddleware } = require('../middleware/adminRole.middleware');
+const { roleAdminMiddleware, roleHostMiddleware, roleGuestMiddleware } = require('../middleware/adminRole.middleware');
+const { isItMyAccommMiddleware } = require('../middleware/accommodations/isItMyAccomm.middleware');
 const { uploadAccomm } = require('../utils/multer')
 // const { upload } = require('../utils/testMulter')
 
@@ -16,7 +17,7 @@ router.route('/')
   .get(accommodationsServices.getAll)
 
 router.route('/:id/make-reservation')
-  .post(passport.authenticate('jwt', { session: false }),roleGuestMiddleware, reservationsServices.postReservation);
+  .post(passport.authenticate('jwt', { session: false }), roleGuestMiddleware, reservationsServices.postReservation);
 
 router.route('/my-accommodations')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, accommodationsServices.getMyAccommodations)
@@ -24,7 +25,7 @@ router.route('/my-accommodations')
 
 router.route('/my-accommodations/:id')
   .get(passport.authenticate('jwt', { session: false }), roleHostMiddleware, accommodationsServices.getMyAccommodation)
-  .delete(passport.authenticate('jwt', { session: false }), roleHostMiddleware, accommodationsServices.deleteMyAccommodation)
+  .delete(passport.authenticate('jwt', { session: false }), roleHostMiddleware, isItMyAccommMiddleware, accommodationsServices.deleteMyAccommodation)
   .put(passport.authenticate('jwt', { session: false }), roleHostMiddleware, accommodationsServices.editMyAccommodation)
 
 router.route('/my-accommodations/:id/post-image')
@@ -33,7 +34,7 @@ router.route('/my-accommodations/:id/post-image')
     accommodationsImages.sendImageMyAccommo)
 
 router.route('/host-accommodations')
-  .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware,accommodationsServices.getAccommodationsByHostId)
+  .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, accommodationsServices.getAccommodationsByHostId)
 
 router.route('/:id')
   .get(accommodationsServices.getById)

@@ -45,7 +45,7 @@ const getAccommodationById = async (id) => {
         model: Users,
         as: 'user',
         attributes: {
-          exclude: ['createdAt', 'updatedAt', 'gender', 'password', 'birthdayDate', 'dni', 'roleId', 'address', 'status','verified']
+          exclude: ['createdAt', 'updatedAt', 'gender', 'password', 'birthdayDate', 'dni', 'roleId', 'address', 'status', 'verified']
         }
       }
     ]
@@ -66,7 +66,7 @@ const createAccommodation = async (userId, data) => {
 }
 
 const updateAccommodation = async (accommodationId, data) => {
-  const { id, hostId, score, placeId, ...restOfData } = data;
+  const { id, userId, score, placeId, ...restOfData } = data;
   const response = await Accommodations.update(
     restOfData,
     { where: { id: accommodationId } }
@@ -74,8 +74,16 @@ const updateAccommodation = async (accommodationId, data) => {
   return response;
 }
 
+// const deleteAccommodation = async (accommodationId) => {
+//   const response = await Accommodations.destroy({ where: { id: accommodationId } });
+
+//   return response
+// }
 const deleteAccommodation = async (accommodationId) => {
-  const response = await Accommodations.destroy({ where: { id: accommodationId } });
+  const response = await Accommodations.update(
+    { isActive: false },
+    { where: { id: accommodationId } }
+  );
 
   return response
 }
@@ -100,7 +108,7 @@ const getAllMyAccommodations = async (userId) => {
 }
 
 const getMyAccommodationById = async (hostId, accommodationId) => {
-  console.log({userId:hostId,accommodationId});
+  console.log({ userId: hostId, accommodationId });
   const response = Accommodations.findOne({
     where: {
       userId: hostId,
@@ -135,7 +143,23 @@ const editMyAccommodationById = async (userId, accommodationId, data) => {
 
   return response;
 }
-
+//Get all accommodations as Admin of any host
+const getAllHostAccomm = async (hostId) => {
+  const response = await Accommodations.findAll({
+    where: {
+      userId: hostId
+    },
+    include: [
+      {
+        model: Places,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
+      }
+    ]
+  })
+  return response;
+}
 
 
 module.exports = {
@@ -147,6 +171,7 @@ module.exports = {
   getAllMyAccommodations,
   getMyAccommodationById,
   deleteMyAccommodationById,
-  editMyAccommodationById
+  editMyAccommodationById,
+  getAllHostAccomm
 }
 

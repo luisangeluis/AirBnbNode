@@ -41,19 +41,20 @@ const post = (req, res) => {
 }
 
 const edit = (req, res) => {
-  const id = req.params.id;
+  const roleId = req.params.id;
   const data = req.body;
+  const { id, ...restOfData } = data;
 
-  if (!Object.keys(data).length) {
+  if (!Object.keys(restOfData).length) {
     return res.status(400).json({ message: 'Missing data' });
   }
 
-  rolesControllers.updateRole(id, data)
+  rolesControllers.updateRole(roleId, restOfData)
     .then(response => {
-      if (response)
-        return res.status(200).json({ message: `Role with id:${id} edited successfully` })
+      if (response[0])
+        return res.status(200).json({ message: `Role with id:${roleId} edited successfully` })
       else
-        return res.status(401).json({ message: `The role with id:${id} doesn't exist` })
+        return res.status(401).json({ message: `The role with id:${roleId} doesn't exist` })
     })
     .catch(error => res.status(400).json({ message: error.message }))
 }
@@ -71,7 +72,7 @@ const remove = (req, res) => {
     .catch(error => res.status(400).json({ message: error.message }))
 }
 
-module.exports={
+module.exports = {
   getAll,
   getById,
   post,

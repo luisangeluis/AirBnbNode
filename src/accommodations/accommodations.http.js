@@ -58,14 +58,15 @@ const post = (req, res) => {
 const editAccomodation = (req, res) => {
   const accommodationId = req.params.id;
   const data = req.body;
+  const { id, userId, score, placeId,...restOfData } = data;
 
-  if (!Object.keys(data).length) {
+  if (!Object.keys(restOfData).length) {
     return res.status(400).json({ message: 'Missing data' });
   }
 
-  Accommodations.updateAccommodation(accommodationId, data)
+  Accommodations.updateAccommodation(accommodationId, restOfData)
     .then(response => {
-      if (response) {
+      if (response[0]) {
         return res.status(200).json({ message: `Accommodation with id:${accommodationId} edited succesfully` })
 
       } else {
@@ -83,7 +84,7 @@ const remove = (req, res) => {
 
   Accommodations.deleteAccommodation(accommodationid)
     .then(response => {
-      if (response) {
+      if (response[0]) {
         return res.status(204).json();
       }
       else {
@@ -131,11 +132,11 @@ const getMyAccommodation = (req, res) => {
 }
 
 const deleteMyAccommodation = (req, res) => {
-  const hostId = req.user.id;
+  // const hostId = req.user.id;
   const accommodationId = req.params.id;
-  Accommodations.deleteMyAccommodationById(hostId, accommodationId)
+  Accommodations.deleteAccommodation(accommodationId)
     .then(response => {
-      if (response) {
+      if (response[0]) {
         return res.status(204).json();
       } else {
         return res.status(404).json({ message: `The accommodation with id: ${accommodationId} doesn't exist` })
@@ -175,7 +176,7 @@ const editMyAccommodation = (req, res) => {
 //Get all accommodations as Admin of any host
 const getAccommodationsByHostId = (req, res) => {
   const data = req.body;
-  const hostId = data.hostId
+  const hostId = data.hostId;
 
   if (!Object.keys(data).length) {
     return res.status(400).json({ message: 'Missing data' });
@@ -190,14 +191,14 @@ const getAccommodationsByHostId = (req, res) => {
     })
   }
 
-  Accommodations.getMyAccommodationById(hostId)
+  Accommodations.getAllHostAccomm(hostId)
     .then(response => {
-      if (response)
+      if (response[0])
         return res.status(200).json({ items: response.length, response })
       else
         return res.status(404).json({ message: `User with id:${hostId} doesn't exist` })
     })
-    .catch(error => res.status(404).json({ message: error.message }))
+    .catch(error => res.status(400).json({ message: error.message }))
 }
 
 

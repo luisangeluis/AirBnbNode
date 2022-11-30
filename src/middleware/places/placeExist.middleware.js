@@ -5,7 +5,7 @@ const placeExistMiddleware = (req, res, next) => {
 
   Places.findOne({ where: { id: placeId } })
     .then(response => {
-      console.log('la response',response);
+      console.log('la response', response);
       if (response)
         next();
       else

@@ -55,20 +55,20 @@
 5. Puede ver perfiles de usuario.<!--Ready-->
 6. Puede ver todos los lugares que le pertenecen.<!--Ready-->
 7. Editar el lugar.<!--Ready-->
-8. Puede eliminar el lugar.
+8. Puede eliminar el lugar.<!--Ready-->
 
 ### Admin
 1. Ver los lugares<!--Ready-->
 2. Puede ver la informacion de un lugar.<!--Ready-->
 3. Puede ver perfiles de usuario.<!--Ready-->
-4. Editar el lugar.
+4. Editar el lugar.<!--Ready-->
 <!-- Elimina completamente el lugar -->
-5. Puede eliminar el lugar.
+5. Puede eliminar el lugar.<!-- Ready -- >
 <!-- Building the controllers of roles -->
-6. Modificar roles.  
-7. Eliminar un usuario.
-8. Modificar un usuario. 
-9. Ver los lugares de los host.
+6. Modificar roles.<!--Ready-->
+7. Eliminar un usuario.<!--Ready-->
+8. Modificar un usuario.<!--Ready--> 
+9. Ver los lugares de los host.<!--Ready-->
 
 ### Accommodations
 

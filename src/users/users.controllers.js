@@ -66,7 +66,7 @@ const editUser = async (userId, data, userRole) => {
   }
 
 }
-
+//TODO build a method to change user status
 const deleteUser = async (id) => {
   const data = await Users.destroy({
     where: {
