@@ -1,7 +1,8 @@
-const multer =require('multer');
+const multer = require('multer');
+
 const upload = multer({
-  dest:'imgsAccomm',
-  
+  dest: 'imgsAccomm',
+
 })
 
 exports.upload = upload;

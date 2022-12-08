@@ -12,13 +12,17 @@ const path = require('path');
 // const upload = multer({ storage: storage })
 
 const uploadAccomm = () => {
+  const time = Date.now();
+  const today = new Date(time);
+  const date  = today.toLocaleDateString().replace(/\//g,'-');
+  
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.resolve('imgsAccomm/'))
     },
     filename: function (req, file, cb) {
-      // cb(null, file.fieldname + '-' + Date.now())
-      cb(null, Date.now()+'-'+ file.originalname)
+      cb(null, file.originalname + '-' + Date.now())
+      // cb(null,'file'+'-'+date+'-'+file.originalname)
     }
   })
   const upload = multer({ storage: storage })

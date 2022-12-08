@@ -3,12 +3,20 @@ const AccommodationsImages = require('./accommodationsImages.controllers');
 const sendImageMyAccommo = (req, res) => {
   const hostId = req.user.id;
   const accommodationId = req.params.id;
-  
-  const url = req.hostname + ':3000' + '/api/v1/imgsaccomm/' + req.file.filename;
-  // const url = 'https://foo.com';
-  const name = req.file.originalname
-  const data = {name,accommodationId,url}
-  console.log('req.file',req.file);
+  const file = req.file;
+
+  if (!file) return res.status(400).json({ message: 'Attach image' })
+
+  const url =req.hostname + ':3000' + '/api/v1/imgsaccomm/' + req.file.filename;
+  // const url =`HLLA://foo.com`;
+  // const url = 'foo.com' 
+  console.log({req});
+  const name = req.file.filename;
+  const data = {name,url}
+  // console.log({ file });
+  console.log({ url });
+  // hostId,name de archivo,accommodationId,url
+
   AccommodationsImages.postImageMyAccommodationById(hostId, accommodationId,data)
     .then(response => {
       console.log('mi response',response);

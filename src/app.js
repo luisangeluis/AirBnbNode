@@ -6,14 +6,13 @@ const { verbMiddleware } = require('./middleware/examples/verbs');
 const path = require('path');
 require('./middleware/auth.middleware')(passport);
 
-const {upload} = require('./utils/testMulter')
-
+const { upload } = require('./utils/testMulter')
 
 //Archivos de rutas
 const rolesRouter = require('./roles/roles.routes').router;
 const usersRouter = require('./users/users.routes').router;
 const authRouter = require('./auth/auth.routes').router;
-const accommodationsRouter =require('./accommodations/accommodations.routes').router;
+const accommodationsRouter = require('./accommodations/accommodations.routes').router;
 const reservationsRouter = require('./reservations/reservations.routes').router;
 const placesRouter = require('./places/places.routes').router;
 
@@ -43,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
     .catch(error => console.log(error))
 } else {
   db.sync({ force: true })
-  // db.sync()
+    // db.sync()
     .then(() => {
       console.log('database synced');
       defaultData();
@@ -54,13 +53,13 @@ if (process.env.NODE_ENV === 'production') {
 //para que el body de la peticion no salga undefined
 app.use(express.json());
 
-app.use('/api/v1/roles',rolesRouter);
+app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/accommodations',accommodationsRouter);
-app.use('/api/v1/reservations',reservationsRouter);
-app.use('/api/v1/places',placesRouter);
-app.use('/v1/doc',swaggerUi.serve,swaggerUi.setup(swaggerDoc));
+app.use('/api/v1/accommodations', accommodationsRouter);
+app.use('/api/v1/reservations', reservationsRouter);
+app.use('/api/v1/places', placesRouter);
+app.use('/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 
 app.get("/api/v1/uploads/:imgName", (req, res) => {
@@ -73,8 +72,8 @@ app.get("/api/v1/uploadsimgsaccomm/:imgName", (req, res) => {
   res.status(200).sendFile(path.resolve('uploadsImgsAccommo/') + '/' + imgName)
 })
 
-app.post('/upload',upload.single('accommodationimg'),function(req,res){
-  res.status(200).json({message:'hola'})
+app.post('/upload', upload.single('accommodationimg'), function (req, res) {
+  res.status(200).json({ message: 'hola' })
 })
 
 app.listen(PORT, () => {

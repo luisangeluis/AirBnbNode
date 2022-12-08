@@ -3,17 +3,15 @@ const uuid = require('uuid');
 const Accommodations = require('../models/accommodations.model');
 const AccommodationsImages = require('../models/accommodationsImages.model')
 
-const postImageMyAccommodationById = async (hostId, accommodationId, data) => {
+const postImageMyAccommodationById = async (userId, accommodationId, data) => {
 
   //TODO Personalizar los multers para cargar los archivos segun las necesidades del controller
   try {
-    console.log('info de data',data);
-    console.log('data url',data.url);
-    const accommodation = await Accommodations.findOne({ where: { id: accommodationId, hostId } })
-    console.log('accomm buscado',accommodation);
+    const accommodation = await Accommodations.findOne({ where: { id: accommodationId, userId } })
     if (accommodation) {
       const response = await AccommodationsImages.create({
         ...data,
+        accommodationId,
         id: uuid.v4()
       })
 
