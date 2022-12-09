@@ -22,6 +22,24 @@ const postImageMyAccommodationById = async (userId, accommodationId, data) => {
   }
 }
 
+const postImagesToMyAccomm = async (userId, accommodationId, arrayOfData) => {
+  try {
+    const accommodation = await Accommodations.findOne({ where: { id: accommodationId, userId } })
+    if (accommodation) {
+      arrayOfData.forEach(element => {
+        element.id = uuid.v4();
+        element.accommodationId = accommodationId;
+      });
+      console.log(arrayOfData);
+      const response = await AccommodationsImages.bulkCreate(arrayOfData);
+      return response;
+    }
+  } catch (error) {
+    return error.message;
+  }
+}
+
 module.exports = {
-  postImageMyAccommodationById
+  postImageMyAccommodationById,
+  postImagesToMyAccomm
 }

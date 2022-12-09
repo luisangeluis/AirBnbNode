@@ -31,7 +31,12 @@ router.route('/my-accommodations/:id')
 router.route('/my-accommodations/:id/post-image')
   .post(passport.authenticate('jwt', { session: false }),
     roleHostMiddleware, uploadAccomm().single('accommodationimg'),
-    accommodationsImages.sendImageMyAccommo)
+    accommodationsImages.sendImageMyAccommo);
+
+router.route('/my-accommodations/:id/post-images')
+  .post(passport.authenticate('jwt', { session: false }),
+  roleHostMiddleware,uploadAccomm().array('accommodationimg',3),
+  accommodationsImages.sendImagesToAccomm);
 
 router.route('/host-accommodations')
   .get(passport.authenticate('jwt', { session: false }), roleAdminMiddleware, accommodationsServices.getAccommodationsByHostId)

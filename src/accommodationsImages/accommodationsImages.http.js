@@ -30,6 +30,34 @@ const sendImageMyAccommo = (req, res) => {
     })
 }
 
+const sendImagesToAccomm=(req,res)=>{
+  // console.log(req.files);
+  const hostId =req.user.id;
+  const accommId = req.params.id;
+  const urls =[];
+  const files = req.files;
+
+  if (!files) return res.status(400).json({ message: 'Attach images' })
+  
+  files.forEach(file => {
+    // console.log(file);
+    // const url = req.hostname + ':3000' + '/api/v1/imgsaccomm/' + file.filename;
+    // urls.push(url);
+    const url ={name:file.filename,url:req.hostname + ':3000' + '/api/v1/imgsaccomm/' + file.filename}
+    urls.push(url);
+  });
+  // console.log(urls);
+
+  AccommodationsImages.postImagesToMyAccomm(hostId,accommId,urls)
+    .then(response=>{
+      console.log({response});
+    })
+    .catch(error=> res.status(400).json({message:error.message}))
+
+
+}
+
 module.exports = {
-  sendImageMyAccommo
+  sendImageMyAccommo,
+  sendImagesToAccomm
 }
