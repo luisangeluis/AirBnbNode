@@ -39,7 +39,18 @@ const postImagesToMyAccomm = async (userId, accommodationId, arrayOfData) => {
   }
 }
 
+const readImagesOfAccomm = async (accommodationId) => {
+  const response = await AccommodationsImages.findAll({ where: { accommodationId } });
+  return response;
+}
+const readImageOfAccomm = async (fileName) => {
+  const response = await AccommodationsImages.findOne({ where: { name: fileName } })
+  return response;
+}
+
 module.exports = {
   postImageMyAccommodationById,
-  postImagesToMyAccomm
+  postImagesToMyAccomm,
+  readImagesOfAccomm,
+  readImageOfAccomm
 }
