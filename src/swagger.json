@@ -5,12 +5,13 @@
     "version": "1.0.0"
   },
   "paths": {
-    "api/v1/users": {
+    "/api/v1/users": {
       "get": {
         "description": "Get all mi users",
         "tags": [
-          "Users",
-          "v1"
+          "Users", 
+          "v1",
+          "api"
         ],
         "responses": {
           "200": {
@@ -22,7 +23,7 @@
         }
       }
     },
-    "api/v1/users/{id}": {
+    "/api/v1/users/{id}": {
       "get": {
         "parameters": [
           {

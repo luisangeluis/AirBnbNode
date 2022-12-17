@@ -5,6 +5,8 @@ const swaggerUi = require('swagger-ui-express');
 const { verbMiddleware } = require('./middleware/examples/verbs');
 const path = require('path');
 require('./middleware/auth.middleware')(passport);
+const cors =require('cors');
+
 
 const { upload } = require('./utils/testMulter')
 
@@ -52,6 +54,9 @@ if (process.env.NODE_ENV === 'production') {
 
 //para que el body de la peticion no salga undefined
 app.use(express.json());
+//Cors
+app.use(cors());
+
 
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/users', usersRouter);
