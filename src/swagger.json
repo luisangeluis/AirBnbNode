@@ -2,16 +2,25 @@
   "openapi": "3.0.1",
   "info": {
     "title": "API Rest Clon de Airbnb",
+    "description": "Api para imitar las funciones de la pagina Airbnb",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url":"http://localhost:3000",
+      "'description":"una url"
+    },
+    {
+      "url":"https://airbnb-clone.onrender.com",
+      "'description":"https://airbnb-clone.onrender.com"
+    }
+  ],
   "paths": {
     "/api/v1/users": {
       "get": {
         "description": "Get all mi users",
         "tags": [
-          "Users", 
-          "v1",
-          "api"
+          "Users"
         ],
         "responses": {
           "200": {
@@ -36,8 +45,7 @@
         ],
         "description": "Get one user by Id",
         "tags": [
-          "Users",
-          "v1"
+          "Users"
         ],
         "responses": {
           "200": {
