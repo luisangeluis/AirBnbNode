@@ -7,24 +7,66 @@
   },
   "servers": [
     {
-      "url":"http://localhost:3000",
-      "'description":"una url"
+      "url": "http://localhost:3000",
+      "'description": "una url"
     },
     {
-      "url":"https://airbnb-clone.onrender.com",
-      "'description":"https://airbnb-clone.onrender.com"
+      "url": "https://airbnb-clone.onrender.com",
+      "'description": "https://airbnb-clone.onrender.com"
     }
   ],
   "paths": {
     "/api/v1/users": {
       "get": {
-        "description": "Get all mi users",
+        "summary": "Get all my users",
         "tags": [
           "Users"
         ],
+        "description": "Get all mi users",
         "responses": {
           "200": {
-            "description": "We successfully get all users"
+            "description": "Successful operation",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "description": "The user ID"
+                    },
+                    "name": {
+                      "type": "uuid",
+                      "description": "The user ID"
+                    }
+                  }
+                },
+                "example": {
+                  "items": 2,
+                  "users": [
+                    {
+                      "id": "74cd6011-7e76-4d6d-b25b-1d6e4182ec2f",
+                      "firstName": "Sahid",
+                      "lastName": "Kick",
+                      "email": "sahid.kick@academlo.com",
+                      "roleId": "5ee551ed-7bf4-44b0-aeb5-daaa824b9473",
+                      "profileImage": "asd.com",
+                      "status": "active"
+                    },
+                    {
+                      "id": "3bd244ca-7a80-4f1f-9732-019871f53a54",
+                      "firstName": "Luis",
+                      "lastName": "Zepeda",
+                      "email": "luis@academlo.com",
+                      "roleId": "97006fe0-4a35-47f4-bfbf-fc962e5fe500",
+                      "profileImage": "asd.com",
+                      "status": "active"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": "true"
           },
           "400": {
             "description": "We get an error if the request is not resolved"

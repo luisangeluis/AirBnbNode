@@ -7,11 +7,10 @@ const { response } = require('express');
 const getAllUsers = async () => {
   const data = await Users.findAll({
     attributes: {
-      exclude: ['password']
+      exclude: ['password','createdAt','updatedAt','verified','address','dni','birthdayDate','phone','gender']
     }
   });
-
-
+  
   return data;
 }
 
@@ -21,7 +20,7 @@ const getUserById = async (id) => {
       id: id
     },
     attributes: {
-      exclude: ['password']
+      exclude: ['password','createdAt','updatedAt','verified','address','dni','birthdayDate','phone','gender']
     }
   })
   return data;

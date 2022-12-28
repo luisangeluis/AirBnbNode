@@ -64,7 +64,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/accommodations', accommodationsRouter);
 app.use('/api/v1/reservations', reservationsRouter);
 app.use('/api/v1/places', placesRouter);
-app.use('/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 
 app.get("/api/v1/uploads/:imgName", (req, res) => {
