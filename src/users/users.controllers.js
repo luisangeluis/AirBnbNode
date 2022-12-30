@@ -3,15 +3,24 @@ const { hashPassword } = require('../utils/crypt');
 const Users = require('../models/user.model');
 const Roles = require('../models/roles.model');
 const { response } = require('express');
+const { Op } = require('sequelize');
 
 const getAllUsers = async () => {
-  const data = await Users.findAll({
-    attributes: {
-      exclude: ['password','createdAt','updatedAt','verified','address','dni','birthdayDate','phone','gender']
-    }
-  });
-  
-  return data;
+  try {
+    const adminRole = await Roles.findOne({ where: { name: 'admin' } });
+    const data = await Users.findAll({
+      where:{
+        roleId:{[Op.not]:adminRole.id}
+      },
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt', 'verified', 'address', 'dni', 'birthdayDate', 'phone', 'gender']
+      }
+    });
+
+    return data;
+  } catch (err) {
+    return err;
+  }
 }
 
 const getUserById = async (id) => {
@@ -20,7 +29,7 @@ const getUserById = async (id) => {
       id: id
     },
     attributes: {
-      exclude: ['password','createdAt','updatedAt','verified','address','dni','birthdayDate','phone','gender']
+      exclude: ['password', 'createdAt', 'updatedAt', 'verified', 'address', 'dni', 'birthdayDate', 'phone', 'gender']
     }
   })
   return data;
