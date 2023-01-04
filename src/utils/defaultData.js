@@ -77,7 +77,7 @@ const generateData = async () => {
     address: "",
     roleId: "fef3a08d-2cec-4728-9745-7cbd2b37e557",
     profileImage: "asd.com",
-    status: "active",
+    status: "suspended",
     verified: false
   });
 

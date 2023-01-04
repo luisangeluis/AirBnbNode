@@ -35,9 +35,21 @@
                       "type": "uuid",
                       "description": "The user ID"
                     },
-                    "name": {
-                      "type": "uuid",
-                      "description": "The user ID"
+                    "firstName": {
+                      "type": "string",
+                      "description": "The first name of the user"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "The last name of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email of the user"
+                    },
+                    "profileImage": {
+                      "type": "image",
+                      "description": "The profile picture of the user"
                     }
                   }
                 },
@@ -58,7 +70,6 @@
                       "firstName": "Luis",
                       "lastName": "Zepeda",
                       "email": "luis@academlo.com",
-                      "roleId": "97006fe0-4a35-47f4-bfbf-fc962e5fe500",
                       "profileImage": "asd.com",
                       "status": "active"
                     }
@@ -69,7 +80,20 @@
             "required": "true"
           },
           "400": {
-            "description": "We get an error if the request is not resolved"
+            "description": "We get an error message if the request is not resolved",
+            "content":{
+              "aplication/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "message":{
+                      "type":"string",
+                      "description":"Error message" 
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

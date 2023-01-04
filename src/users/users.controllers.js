@@ -6,21 +6,20 @@ const { response } = require('express');
 const { Op } = require('sequelize');
 
 const getAllUsers = async () => {
-  try {
     const adminRole = await Roles.findOne({ where: { name: 'admin' } });
+    const adminRoleId = '5ee551ed-7bf4-44b0-aeb5-daaa824b9473';
+
     const data = await Users.findAll({
       where:{
-        roleId:{[Op.not]:adminRole.id}
+        roleId:{[Op.not]:adminRoleId},
+        status:'active'
       },
-      attributes: {
-        exclude: ['password', 'createdAt', 'updatedAt', 'verified', 'address', 'dni', 'birthdayDate', 'phone', 'gender']
-      }
+      attributes:['id','firstName','lastName','email','profileImage']
+      
     });
 
     return data;
-  } catch (err) {
-    return err;
-  }
+  
 }
 
 const getUserById = async (id) => {
@@ -34,6 +33,7 @@ const getUserById = async (id) => {
   })
   return data;
 }
+
 const createUser = async (data) => {
   const newUser = await Users.create({
     ...data,
