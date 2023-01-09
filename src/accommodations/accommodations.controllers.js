@@ -6,22 +6,20 @@ const Users = require('../models/user.model')
 
 const getAllAccommodations = async () => {
   const data = await Accommodations.findAll({
-    attributes: {
-      exclude: ['createdAt', 'updatedAt', 'userId', 'placeId', 'hostId']
-    },
+    where: { isActive: true },
+    attributes: ['id', 'title', 'description', 'guests', 'bathrooms', 'price', 'score'],
     include: [
       {
         model: Users,
         as: 'user',
-        attributes: {
-          exclude: ['gender', 'password', 'birthdayDate', 'dni', 'roleId', 'address', 'status', 'verified', 'createdAt', 'updatedAt']
-        }
+        attributes:['id','firstName','lastName','email','profileImage']
       },
       {
         model: Places,
-        attributes: {
-          exclude: ['createdAt', 'updatedAt']
-        }
+        // attributes: {
+        //   exclude: ['createdAt', 'updatedAt']
+        // }
+        attributes:['id','city','state','country','continent']
       }
     ]
   })

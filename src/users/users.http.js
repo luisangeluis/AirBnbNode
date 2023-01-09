@@ -12,22 +12,13 @@ const getAll = (req, res) => {
 
 const getById = (req, res) => {
   const id = req.params.id;
+  
   userControllers.getUserById(id)
     .then(response => {
-      res.status(200).json(response);
+      if (response) res.status(200).json(response)
+      else res.status(404).json({ message: `The reservation with id: ${id} doesn't exist` });
     })
-    .catch(err => {
-      res.status(404).json({ message: `El usuario con el id ${id} no existe` });
-    })
-
-
-  // const data = userControllers.getUserById(id);
-
-  // if (data) {
-  //   res.status(200).json(data);
-  // } else {
-  //   res.status(404).json({ message: `El usuario con el id ${id} no existe` });
-  // }
+    .catch(err => res.status(404).json({ message: err.message }))
 };
 
 const register = (req, res) => {

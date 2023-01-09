@@ -18,18 +18,18 @@
   "paths": {
     "/api/v1/users": {
       "get": {
-        "summary": "Get all my users",
+        "summary": "Get all users",
         "tags": [
           "Users"
         ],
-        "description": "Get all mi users",
+        "description": "Get all users",
         "responses": {
           "200": {
             "description": "Successful operation",
             "content": {
               "aplication/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
                   "properties": {
                     "id": {
                       "type": "uuid",
@@ -79,8 +79,8 @@
             },
             "required": "true"
           },
-          "400": {
-            "description": "We get an error message if the request is not resolved",
+          "404":{
+            "description":"We get an error if user id doesn't exist",
             "content":{
               "aplication/json":{
                 "schema":{
@@ -88,7 +88,24 @@
                   "properties":{
                     "message":{
                       "type":"string",
-                      "description":"Error message" 
+                      "description":"The user with id {id} doesn't exist"
+                      
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "We get an error message if the request is not resolved",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
                     }
                   }
                 }
@@ -100,6 +117,7 @@
     },
     "/api/v1/users/{id}": {
       "get": {
+        "summary": "Get an user by id",
         "parameters": [
           {
             "name": "id",
@@ -115,11 +133,122 @@
         ],
         "responses": {
           "200": {
-            "description": "We successfully get one user"
+            "description": "Successful operation",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The user ID"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "The first name of the user"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "The last name of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email of the user"
+                    },
+                    "profileImage": {
+                      "type": "string",
+                      "description": "The profile picture of the user"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "We get an error if the request is not resolved"
+            "description": "We get an error message if the request is not resolved",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"We get an error if user id doesn't exist",
+            "content":{
+              "aplication/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "message":{
+                      "type":"string",
+                      "description":"The user with id {id} doesn't exist"
+                      
+                    }
+                  }
+                }
+              }
+            }
           }
+        }
+      }
+    },
+    "/api/v1/accommodations":{
+      "get":{
+        "summary":"Get all accommodations",
+        "tags":["Accommodations"],
+        "description":"Get all accommodations",
+        "responses":{
+          "200":{
+            "description":"Get all accommodations",
+            "content":{
+              "aplication/json":{
+                "schema":{
+                  "type":"array",
+                  "properties":{
+                    "id": {
+                      "type": "uuid",
+                      "description": "The user ID"
+                    },
+                    "title":{
+                      "type":"string",
+                      "description":"The accommodation title"
+                    },
+                    "description":{
+                      "type":"string",
+                      "description":"The accommodation description"
+                    },
+                    "guests":{
+                      "type":"int",
+                      "description":"Numbers of guests"
+                    },
+                    "bathrooms":{
+                      "type":"decimal",
+                      "description":"Numbers of bathrooms"
+                    },
+                    "price":{
+                      "type":"float",
+                      "description":"Price of accommodation"
+                    },
+                    "score":{
+                      "type":"float",
+                      "description":"Accommodation score"
+                    }
+                    
+                  }
+                }
+              }
+            }
+          },
+          "400":{},
+          "404":{}
         }
       }
     }

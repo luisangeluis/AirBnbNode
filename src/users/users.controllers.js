@@ -27,9 +27,8 @@ const getUserById = async (id) => {
     where: {
       id: id
     },
-    attributes: {
-      exclude: ['password', 'createdAt', 'updatedAt', 'verified', 'address', 'dni', 'birthdayDate', 'phone', 'gender']
-    }
+    attributes:['id','firstName','lastName','email','profileImage']
+
   })
   return data;
 }
